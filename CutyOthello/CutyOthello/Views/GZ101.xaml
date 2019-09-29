@@ -9,13 +9,15 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="4"/>
+                <RowDefinition Height="9*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="Test"  Source="apl.png" Opacity="0" Grid.Column="1" Grid.Row="1"/>
+            <Image x:Name="Test"  Source="CompanyLogo.png" Opacity="0" Grid.Column="1" Grid.Row="1"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

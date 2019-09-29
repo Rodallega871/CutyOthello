@@ -26,6 +26,7 @@ namespace CutyOthello.Views
                 {
                     //１度ロゴを表示したら次画面に遷移
                     Application.Current.MainPage = new GZ102();
+                    tim.Stop();
                 }
                 // 不透明度の初期値は0（透明）
                 Test.Opacity = 0;

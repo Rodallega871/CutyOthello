@@ -6,12 +6,11 @@ namespace CutyOthello.ViewModels
 {
     public class GZ102ViewModel : BaseViewModel
     {
-
-
-
-
         public GZ102ViewModel()
         {
+
+
+
                             
         }
     }
