@@ -7,14 +7,37 @@ using Xamarin.Forms;
 
 namespace CutyOthello.Views
 {
-    public class BoardView : ContentView
+    public class BoardView : AbsoluteLayout
     {
+            // Alternative sizes make the tiles a tad small.
+            const int COLS = 8;         // 16
+            const int ROWS = 8;         // 16
+            const int BUGS = 10; // 40
+
+        // The array of tiles
+        StoneView[,] stoneViews = new StoneView[ROWS, COLS];
+
         public BoardView()
         {
-            Content = new StackLayout
+            for (int row = 0; row < ROWS; row++)
+                for (int col = 0; col < COLS; col++)
+                {
+                    StoneView stoneView = new StoneView(row, col);
+                    Children.Add(stoneView.OneStoneView);
+                    stoneViews[row, col] = stoneView;
+                }
+
+            SizeChanged += (sender, args) =>
             {
-                Children = {
-                    new Label { Text = "Welcome to Xamarin.Forms!" }
+                double tileWidth = this.Width / COLS;
+                double tileHeight = this.Height / ROWS;
+
+                foreach (StoneView stoneView in stoneViews)
+                {
+                    Rectangle bounds = new Rectangle(stoneView.Col * tileWidth,
+                                                     stoneView.Row * tileHeight,
+                                                     tileWidth, tileHeight);
+                    SetLayoutBounds(stoneView.OneStoneView, bounds);
                 }
             };
         }

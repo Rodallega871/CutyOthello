@@ -7,6 +7,9 @@
              x:Class="CutyOthello.Views.GZ101" BackgroundColor="Black">
     <ContentPage.Content>
         <Grid>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapScreen}"/>
+            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="9*"/>

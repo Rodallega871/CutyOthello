@@ -1,5 +1,4 @@
-﻿using CutyOthello.Commn;
-using CutyOthello.ViewModels;
+﻿using CutyOthello.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +11,15 @@ using Xamarin.Forms.Xaml;
 namespace CutyOthello.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GZ102 : ContentPage
+    public partial class GC01 : ContentPage
     {
-        GZ102ViewModel viewmodel;
+        GC01ViewModel viewmodel;
 
-        public GZ102()
+        public GC01()
         {
             InitializeComponent();
 
-            BindingContext = viewmodel = new GZ102ViewModel();
-
+            BindingContext = viewmodel = new GC01ViewModel();
         }
     }
 }

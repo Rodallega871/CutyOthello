@@ -4,7 +4,10 @@ using System.Text;
 
 namespace CutyOthello.Models
 {
-    interface Model
+    public class Model
     {
+        [SQLite.PrimaryKey, SQLite.AutoIncrement]
+        public int Id { get; set; }
+        
     }
 }

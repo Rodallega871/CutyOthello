@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:CutyOthello.Views"
+             x:Class="CutyOthello.Views.GZ201" BackgroundColor="#FBF2DD">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Image Source="buldogSample.png" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                <Label BackgroundColor="Pink" FontSize="Large" Text="Hanako"/>
+            </Grid>
+            <local:BoardView x:Name="board" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                <Button BackgroundColor="Pink" FontSize="Large" Text="PASS"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+                <Button BackgroundColor="Pink" FontSize="Large" Text="Surrender"/>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+                <Button BackgroundColor="Pink" FontSize="Large" Text="TopMenu"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.RowSpan="2" Grid.Column="0">
+                <Image Source="buldogSample.png" />
+            </Grid>
+            <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
+                <Label BackgroundColor="Pink" FontSize="Large" Text="Taro"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

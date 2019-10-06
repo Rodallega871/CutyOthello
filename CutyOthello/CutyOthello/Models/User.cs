@@ -4,12 +4,29 @@ using System.Text;
 
 namespace CutyOthello.Models
 {
-    class User : Model
+    public class User : Model
     {
-        [SQLite.PrimaryKey, SQLite.AutoIncrement]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public DateTime TimeStamp { get; set; }
-        public decimal Value { get; set; }
+        public string GameStatus { get;  set; }
+        public int CompleteCount { get;  set; }
+        public string StoryModeInfo { get;  set; }
+        public string BattleModeInfo { get;  set; }
+        public string StoryBoardInfo { get;  set; }
+        public string BattleBoardInfo{ get;  set; }
+
+        public User()
+        {
+            //SQLite使用時に必要
+        }
+
+        public User(bool dammy)
+        {
+            Id = 0;
+            GameStatus = "I";
+            CompleteCount = 0;
+            StoryModeInfo = "";
+            BattleModeInfo = "";
+            StoryBoardInfo = "";
+            BattleBoardInfo = "";
+        }
     }
 }

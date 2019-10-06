@@ -1,13 +1,19 @@
-﻿using System;
+﻿using CutyOthello.Models;
+using CutyOthello.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace CutyOthello.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public UserDataStore userDataStore = DependencyService.Get<UserDataStore>() ?? new UserDataStore();
+        public CharacterDataStore characterDataStore = DependencyService.Get<CharacterDataStore>() ?? new CharacterDataStore();
+
         protected bool SetProperty<T>(ref T backingStore, T value,
     [CallerMemberName]string propertyName = "",
     Action onChanged = null)

@@ -13,9 +13,14 @@ namespace CutyOthello.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GA01 : ContentPage
     {
+        GA01ViewModel viewmodel;
+
         public GA01()
         {
             InitializeComponent();
+
+            BindingContext = viewmodel = new GA01ViewModel();
+
         }
     }
 }

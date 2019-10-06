@@ -1,4 +1,6 @@
-﻿using CutyOthello.Views;
+﻿using CutyOthello.Models;
+using CutyOthello.Services;
+using CutyOthello.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,6 +12,9 @@ namespace CutyOthello
         public App()
         {
             InitializeComponent();
+
+            DependencyService.Register<UserDataStore>();
+            DependencyService.Register<CharacterDataStore>();
 
             MainPage = new GZ101();
         }

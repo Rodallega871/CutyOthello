@@ -4,12 +4,60 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CutyOthello.Views.GA01">
+             x:Class="CutyOthello.Views.GA01" BackgroundColor="#FBF2DD">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapScreen}"/>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="buldogSample.png" Grid.Row="0" Grid.Column="0"/>
+                <Label BackgroundColor="Pink" Grid.Row="0" Grid.Column="1" Text="Hanako" TextColor="Blue" FontSize="Large" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label BackgroundColor="Pink" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TapCommentPlayerA}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="buldogSample.png" Grid.Row="0" Grid.Column="0"/>
+                <Label BackgroundColor="Pink" Grid.Row="0" Grid.Column="1" Text="Taro" TextColor="Blue" FontSize="Large" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label BackgroundColor="Pink" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TapCommentPlayerB}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

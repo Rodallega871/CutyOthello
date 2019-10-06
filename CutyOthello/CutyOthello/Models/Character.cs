@@ -4,12 +4,25 @@ using System.Text;
 
 namespace CutyOthello.Models
 {
-    class Character : Model    
+    public class Character : Model    
     {
-        [SQLite.PrimaryKey, SQLite.AutoIncrement]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public DateTime TimeStamp { get; set; }
-        public decimal Value { get; set; }
+        public string DogType { get;  set; }
+        public string DogColor { get;  set; }
+        public string DogName { get;  set; }
+        public string DogOwnerName { get;  set; }
+
+        public Character()
+        {
+            //SQLite使用時に必要
+        }
+
+        public Character(int id, string dogType, string dogColor, string dogName, string dogOwnerName)
+        {
+            Id = id;
+            DogType = dogType;
+            DogColor = dogColor;
+            DogName = dogName;
+            DogOwnerName = dogOwnerName;
+        }
     }
 }

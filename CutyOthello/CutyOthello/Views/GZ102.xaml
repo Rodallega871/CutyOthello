@@ -7,6 +7,9 @@
              x:Class="CutyOthello.Views.GZ102" BackgroundColor="#FBF2DD">
     <ContentPage.Content>
         <Grid>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding FirstScreenTap}"/>
+            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -42,9 +45,12 @@
                     <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>      
-                <Button Text="ストーリーモード" Grid.Row="1" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"/>
-                <Button Text="バトルモード" Grid.Row="2" Grid.Column="1" BackgroundColor="Pink" FontFamily="25" />
-                <Button Text="エディットモード" Grid.Row="3" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"/>
+                <Button Text="ストーリーモード" Grid.Row="1" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"
+                        Command="{Binding ClickButtonGA01}" IsEnabled="{Binding IsEnabledButtonGA01}"/>
+                <Button Text="バトルモード" Grid.Row="2" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"                        
+                        Command="{Binding ClickButtonGB01}" IsEnabled="{Binding IsEnabledButtonGB01}"/>
+                <Button Text="エディットモード" Grid.Row="3" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"                                                
+                        Command="{Binding ClickButtonGC01}" IsEnabled="{Binding IsEnabledButtonGC01}"/>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
