@@ -2,9 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
              x:Class="CutyOthello.Views.GZ102" BackgroundColor="#FBF2DD">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BorderRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.GestureRecognizers>
@@ -35,21 +50,22 @@
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>      
-                <Button Text="ストーリーモード" Grid.Row="1" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"
-                        Command="{Binding ClickButtonGA01}" IsEnabled="{Binding IsEnabledButtonGA01}"/>
-                <Button Text="バトルモード" Grid.Row="2" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"                        
+                </Grid.ColumnDefinitions>
+                <Button Text="ストーリーモード" Grid.Row="1" Grid.Column="1" Style="{StaticResource ButtonStyle}"
+                        Command="{Binding ClickButtonGA01}" IsEnabled="{Binding IsEnabledButtonGA01}" >
+                </Button>
+                <Button Text="バトルモード" Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonStyle}"                        
                         Command="{Binding ClickButtonGB01}" IsEnabled="{Binding IsEnabledButtonGB01}"/>
-                <Button Text="エディットモード" Grid.Row="3" Grid.Column="1" BackgroundColor="Pink" FontFamily="25"                                                
+                <Button Text="エディットモード" Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonStyle}"                                                
                         Command="{Binding ClickButtonGC01}" IsEnabled="{Binding IsEnabledButtonGC01}"/>
             </Grid>
             <Grid Grid.Row="2">

@@ -17,11 +17,15 @@ namespace CutyOthello.Services
         {
             models = new ObservableCollection<Character>
             {
-               new Character(id:0,dogType:"A",dogColor:"0",dogName:"花子",dogOwnerName:"飼い主A"),
-               new Character(id:1,dogType:"B",dogColor:"0",dogName:"太郎",dogOwnerName:"飼い主A"),
-               new Character(id:2,dogType:"C",dogColor:"0",dogName:"卓",dogOwnerName:"飼い主B"),
-               new Character(id:3,dogType:"D",dogColor:"0",dogName:"犬美",dogOwnerName:"飼い主B"),
-               new Character(id:4,dogType:"E",dogColor:"0",dogName:"犬郎",dogOwnerName:"飼い主C"),
+               new Character(id:0,dogType:"A",dogColor:"0",dogName:"Hanako",dogOwnerName:"A"),
+               new Character(id:1,dogType:"B",dogColor:"0",dogName:"Taro",dogOwnerName:"A"),
+               new Character(id:2,dogType:"C",dogColor:"0",dogName:"Suguru",dogOwnerName:"B"),
+               new Character(id:3,dogType:"D",dogColor:"0",dogName:"Inumi",dogOwnerName:"B"),
+               new Character(id:4,dogType:"E",dogColor:"0",dogName:"Inuro",dogOwnerName:"C"),
+               new Character(id:5,dogType:"E",dogColor:"0",dogName:"Inuro2",dogOwnerName:"C"),
+               new Character(id:6,dogType:"E",dogColor:"0",dogName:"Inuro3",dogOwnerName:"C"),
+               new Character(id:7,dogType:"E",dogColor:"0",dogName:"Inuro4",dogOwnerName:"C"),
+               new Character(id:8,dogType:"E",dogColor:"0",dogName:"Inuro5",dogOwnerName:"C"),
             };
             return Task.FromResult(true);
         }

@@ -5,6 +5,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CutyOthello.Views.GA01" BackgroundColor="#FBF2DD">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Pink"/>
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.GestureRecognizers>
@@ -32,13 +54,15 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="buldogSample.png" Grid.Row="0" Grid.Column="0"/>
-                <Label BackgroundColor="Pink" Grid.Row="0" Grid.Column="1" Text="Hanako" TextColor="Blue" FontSize="Large" 
-                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                <Label BackgroundColor="Pink" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Label.GestureRecognizers>
+                <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="1">
+                    <Label Text="Hanako" Style="{StaticResource LabelStyle}"/>
+                </Frame>
+                <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="今からわんわんわんわんわんわんわんわんわんわんわん" VerticalOptions="Start" HorizontalTextAlignment="Start" Style="{StaticResource LabelStyle}"/>
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding TapCommentPlayerA}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </Grid>
             <Grid Grid.Row="3" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -50,13 +74,15 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="buldogSample.png" Grid.Row="0" Grid.Column="0"/>
-                <Label BackgroundColor="Pink" Grid.Row="0" Grid.Column="1" Text="Taro" TextColor="Blue" FontSize="Large" 
-                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                <Label BackgroundColor="Pink" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Label.GestureRecognizers>
+                <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="1">
+                    <Label Text="Hanako" Style="{StaticResource LabelStyle}"/>
+                </Frame>
+                <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="今からわんわんわんわんわんわんわんわんわんわんわん" VerticalOptions="Start" HorizontalTextAlignment="Start" Style="{StaticResource LabelStyle}"/>
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding TapCommentPlayerB}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </Grid>
         </Grid>
     </ContentPage.Content>

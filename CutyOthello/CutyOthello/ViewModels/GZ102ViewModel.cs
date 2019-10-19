@@ -1,4 +1,5 @@
-﻿using CutyOthello.Views;
+﻿using CutyOthello.Commn;
+using CutyOthello.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -62,6 +63,10 @@ namespace CutyOthello.ViewModels
                 IsEnabledButtonGA01 = true;
                 IsEnabledButtonGB01 = true;
                 IsEnabledButtonGC01 = true;
+
+                //ポップアップを表示する。
+                var test = await DependencyService.Get<IAlertService>().Show(
+                    "Prain text", "Please enter text.", "OK", "Cancel");
 
                 //ポップアップを表示する。
                 var select = await Application.Current.MainPage.DisplayAlert("テストアラート", "アラートです", "OK", "キャンセル");

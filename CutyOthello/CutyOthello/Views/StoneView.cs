@@ -9,7 +9,7 @@ namespace CutyOthello.Views
 {
     public class StoneView : ContentView
     {
-        static ImageSource flagImageSource = ImageSource.FromFile("buldogSample.png");
+        static ImageSource flagImageSource = ImageSource.FromFile("Heart.png");
         static ImageSource bugImageSource = ImageSource.FromFile("buldogSample.png");
 
         public int Row { private set; get; }
@@ -43,16 +43,16 @@ namespace CutyOthello.Views
             {
                 NumberOfTapsRequired = 1
             };
+                
+            singleTap.Tapped += ChangeStone;
 
-            //singleTap.Tapped += ChangeStone();
-
-            this.GestureRecognizers.Add(singleTap);
+            OneStoneView.GestureRecognizers.Add(singleTap);
 
         }
 
-        void ChangeStone(object sender,object args)
+        void ChangeStone(object sender,EventArgs args)
         {
-            
+            OneStoneView.Content = OneStoneView.Content == bugImage ? flagImage : bugImage;
         }
     }
 }

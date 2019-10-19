@@ -6,12 +6,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Drawing;
 
 namespace CutyOthello.Droid
 {
     [Activity(Label = "CutyOthello", Icon = "@drawable/buldogSample", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        readonly Color[] _colors = { Color.Red, Color.Blue, Color.Green };
+        const int ID_COLOR_PICKER = 1;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

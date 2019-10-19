@@ -6,6 +6,41 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:CutyOthello.Views"
              x:Class="CutyOthello.Views.GZ201" BackgroundColor="#FBF2DD">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Pink"/>
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BorderRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -26,23 +61,27 @@
                 <Image Source="buldogSample.png" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                <Label BackgroundColor="Pink" FontSize="Large" Text="Hanako"/>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Label Text="Hanako" Style="{StaticResource LabelStyle}" HorizontalOptions="End"/>
+                </Frame>
             </Grid>
             <local:BoardView x:Name="board" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
             <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
-                <Button BackgroundColor="Pink" FontSize="Large" Text="PASS"/>
+                <Button Text="PASS" Style="{StaticResource ButtonStyle}" Command="{Binding TapPASSButton}"/>
             </Grid>
             <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
-                <Button BackgroundColor="Pink" FontSize="Large" Text="Surrender"/>
+                <Button Text="Surrender" Style="{StaticResource ButtonStyle}" Command="{Binding TapSurrenderButton}"/>
             </Grid>
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
-                <Button BackgroundColor="Pink" FontSize="Large" Text="TopMenu"/>
+                <Button Text="TopMenu" Style="{StaticResource ButtonStyle}" Command="{Binding TapTopMenuButton}"/>
             </Grid>
             <Grid Grid.Row="4" Grid.RowSpan="2" Grid.Column="0">
                 <Image Source="buldogSample.png" />
             </Grid>
             <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
-                <Label BackgroundColor="Pink" FontSize="Large" Text="Taro"/>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Label Text="Taro" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
+                </Frame>
             </Grid>
         </Grid>
     </ContentPage.Content>

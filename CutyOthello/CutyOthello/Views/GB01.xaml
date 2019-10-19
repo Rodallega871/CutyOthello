@@ -5,6 +5,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CutyOthello.Views.GB01"  BackgroundColor="#FBF2DD">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Pink"/>
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BorderRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.GestureRecognizers>
@@ -21,6 +56,11 @@
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Frame Style="{StaticResource FrameStyle}" >
+                    <Label Text="Character Select" Style="{StaticResource LabelStyle}"/>
+                </Frame>
+            </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
                 <ListView HasUnevenRows="True" ItemsSource="{Binding Path=testList}">
                     <ListView.ItemTemplate>
@@ -32,8 +72,7 @@
                                         <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
                                     <Image Source="buldogSample.png" Grid.Column="0"/>
-                                    <Label BackgroundColor="Pink" Grid.Column="1" Text="{Binding DogName}" TextColor="Blue" FontSize="Large" 
-                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding DogName}" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -41,7 +80,9 @@
                 </ListView>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="1">
-                <Label BackgroundColor="Pink" Text="Player1                Player2"/>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Label Style="{StaticResource LabelStyle}" Text="Player1                Player2"/>
+                </Frame>
             </Grid>
             <Grid Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -49,8 +90,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button BackgroundColor="Pink" Grid.Column="0" Text="BACK"  Command="{Binding TapBackButton}"/>
-                <Button BackgroundColor="Pink" Grid.Column="2" Text="OK"  Command="{Binding TapOKButton}"/>
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Text="BACK"  Command="{Binding TapBackButton}"/>
+                <Button Style="{StaticResource ButtonStyle}"  Grid.Column="2" Text="OK"  Command="{Binding TapOKButton}"/>
             </Grid>
         </Grid>
     </ContentPage.Content>
