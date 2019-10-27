@@ -9,21 +9,21 @@ namespace CutyOthello.Views
 {
     public class StoneView : ContentView
     {
-        static ImageSource flagImageSource = ImageSource.FromFile("Heart.png");
-        static ImageSource bugImageSource = ImageSource.FromFile("buldogSample.png");
+        static ImageSource Player1ImageSource = ImageSource.FromFile("shiba.png");
+        static ImageSource Player2ImageSource = ImageSource.FromFile("buldogSample.png");
 
         public int Row { private set; get; }
         public int Col { private set; get; }
         public ContentView OneStoneView { private set; get; }
 
-        Image flagImage = new Image
+        Image Player1Image = new Image
         {
-            Source = flagImageSource
+            Source = Player1ImageSource
         };
 
-        Image bugImage = new Image
+        Image Player2Image = new Image
         {
-            Source = bugImageSource
+            Source = Player2ImageSource
         };
 
         public StoneView(int row, int col)
@@ -31,9 +31,16 @@ namespace CutyOthello.Views
             Row = row;
             Col = col;
 
+            Image tmp = null;
+
+            if (Row == 3 && Col == 4) tmp = Player1Image;
+            if (Row == 4 && Col == 3) tmp = Player2Image;
+            if (Row == 3 && Col == 3) tmp = Player2Image;
+            if (Row == 4 && Col == 4) tmp = Player1Image;
+
             OneStoneView = new Frame
             {
-                Content = bugImage,
+                Content = tmp,
                 BackgroundColor = Color.PaleGreen,
                 BorderColor = Color.LightGray,
                 Padding = new Thickness(5,5,5,5)
@@ -52,7 +59,7 @@ namespace CutyOthello.Views
 
         void ChangeStone(object sender,EventArgs args)
         {
-            OneStoneView.Content = OneStoneView.Content == bugImage ? flagImage : bugImage;
+            OneStoneView.Content = OneStoneView.Content == Player1Image ? Player2Image : Player1Image;
         }
     }
 }

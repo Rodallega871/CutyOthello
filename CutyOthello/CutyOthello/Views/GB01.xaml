@@ -71,7 +71,7 @@
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="buldogSample.png" Grid.Column="0"/>
+                                    <Image Source="{Binding DogPicture}" Grid.Column="0"/>
                                     <Label Text="{Binding DogName}" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
                                 </Grid>
                             </ViewCell>

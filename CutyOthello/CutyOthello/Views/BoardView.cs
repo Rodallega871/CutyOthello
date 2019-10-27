@@ -12,7 +12,6 @@ namespace CutyOthello.Views
             // Alternative sizes make the tiles a tad small.
             const int COLS = 8;         // 16
             const int ROWS = 8;         // 16
-            const int BUGS = 10; // 40
 
         // The array of tiles
         StoneView[,] stoneViews = new StoneView[ROWS, COLS];

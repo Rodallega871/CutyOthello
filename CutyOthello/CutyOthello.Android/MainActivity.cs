@@ -6,15 +6,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using System.Drawing;
+using Android.Content;
+using Android.Graphics;
 
 namespace CutyOthello.Droid
 {
     [Activity(Label = "CutyOthello", Icon = "@drawable/buldogSample", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        readonly Color[] _colors = { Color.Red, Color.Blue, Color.Green };
-        const int ID_COLOR_PICKER = 1;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -22,10 +21,11 @@ namespace CutyOthello.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
+          
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -33,5 +33,6 @@ namespace CutyOthello.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+   
     }
 }

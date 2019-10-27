@@ -17,15 +17,15 @@ namespace CutyOthello.Services
         {
             models = new ObservableCollection<Character>
             {
-               new Character(id:0,dogType:"A",dogColor:"0",dogName:"Hanako",dogOwnerName:"A"),
-               new Character(id:1,dogType:"B",dogColor:"0",dogName:"Taro",dogOwnerName:"A"),
-               new Character(id:2,dogType:"C",dogColor:"0",dogName:"Suguru",dogOwnerName:"B"),
-               new Character(id:3,dogType:"D",dogColor:"0",dogName:"Inumi",dogOwnerName:"B"),
-               new Character(id:4,dogType:"E",dogColor:"0",dogName:"Inuro",dogOwnerName:"C"),
-               new Character(id:5,dogType:"E",dogColor:"0",dogName:"Inuro2",dogOwnerName:"C"),
-               new Character(id:6,dogType:"E",dogColor:"0",dogName:"Inuro3",dogOwnerName:"C"),
-               new Character(id:7,dogType:"E",dogColor:"0",dogName:"Inuro4",dogOwnerName:"C"),
-               new Character(id:8,dogType:"E",dogColor:"0",dogName:"Inuro5",dogOwnerName:"C"),
+               new Character(id:0,dogType:"A",dogColor:"0",dogName:"Hanako",dogOwnerName:"A",dogPicture:"buldogSample.png"),
+               new Character(id:1,dogType:"B",dogColor:"0",dogName:"Taro",dogOwnerName:"A",dogPicture:"buldogSample.png"),
+               new Character(id:2,dogType:"C",dogColor:"0",dogName:"Suguru",dogOwnerName:"B",dogPicture:"buldogSample.png"),
+               new Character(id:3,dogType:"D",dogColor:"0",dogName:"Inumi",dogOwnerName:"B",dogPicture:"shiba.png"),
+               new Character(id:4,dogType:"E",dogColor:"0",dogName:"Butaro",dogOwnerName:"C",dogPicture:"PIG.png"),
+               new Character(id:5,dogType:"E",dogColor:"0",dogName:"Inuro2",dogOwnerName:"C",dogPicture:"shiba.png"),
+               new Character(id:6,dogType:"E",dogColor:"0",dogName:"Butao",dogOwnerName:"C",dogPicture:"PIG.png"),
+               new Character(id:7,dogType:"E",dogColor:"0",dogName:"Inuro4",dogOwnerName:"C",dogPicture:"buldogSample.png"),
+               new Character(id:8,dogType:"E",dogColor:"0",dogName:"ROBO",dogOwnerName:"C",dogPicture:"Robo.png"),
             };
             return Task.FromResult(true);
         }

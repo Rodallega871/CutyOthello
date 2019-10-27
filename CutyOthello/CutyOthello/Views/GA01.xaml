@@ -53,12 +53,12 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="buldogSample.png" Grid.Row="0" Grid.Column="0"/>
+                <Image Source="shiba.png" Grid.Row="0" Grid.Column="0"/>
                 <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="1">
                     <Label Text="Hanako" Style="{StaticResource LabelStyle}"/>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Label Text="今からわんわんわんわんわんわんわんわんわんわんわん" VerticalOptions="Start" HorizontalTextAlignment="Start" Style="{StaticResource LabelStyle}"/>
+                    <Label Text="わんわんわんわんわんわんわんわんわんわんわん" VerticalOptions="Start" HorizontalTextAlignment="Start" Style="{StaticResource LabelStyle}"/>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding TapCommentPlayerA}"/>
                     </Frame.GestureRecognizers>
@@ -78,7 +78,7 @@
                     <Label Text="Hanako" Style="{StaticResource LabelStyle}"/>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Label Text="今からわんわんわんわんわんわんわんわんわんわんわん" VerticalOptions="Start" HorizontalTextAlignment="Start" Style="{StaticResource LabelStyle}"/>
+                    <Label Text="わんわんわんわんわんわんわんわんわんわんわん" VerticalOptions="Start" HorizontalTextAlignment="Start" Style="{StaticResource LabelStyle}"/>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding TapCommentPlayerB}"/>
                     </Frame.GestureRecognizers>

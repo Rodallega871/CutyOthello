@@ -13,6 +13,10 @@ using Android.Widget;
 using CutyOthello.Commn;
 using Android.Util;
 using CutyOthello.Droid;
+using Android.Graphics;
+using Android.Content.Res;
+using Android.Support.V7.App;
+using static Android.App.ActionBar;
 
 [assembly: Dependency(typeof(AlertService))]
 
@@ -24,19 +28,54 @@ namespace CutyOthello.Droid
         {
             var tcs = new TaskCompletionSource<AlertResult>();
 
-            new AlertDialog.Builder(Forms.Context)
-                .SetTitle(title)
-                .SetMessage(message)
+            Typeface typefaceOriginal = Typeface.CreateFromAsset(Forms.Context.Assets, "mini-wakuwaku-maru.otf");
+
+            var view = new Android.Widget.TextView(Forms.Context);
+            view.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            view.SetHeight(150);
+            view.SetWidth(200);
+            view.SetTextSize(ComplexUnitType.Px, 50);
+            view.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            view.SetTextColor(Android.Graphics.Color.RoyalBlue);
+            view.Text = "データがありますが、つづきからはじめますか？";
+
+            var view2 = new Android.Widget.TextView(Forms.Context);
+            view2.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            view2.SetHeight(150);
+            view2.SetWidth(200);
+            view2.SetTextSize(ComplexUnitType.Px, 50);
+            view2.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            view2.SetTextColor(Android.Graphics.Color.RoyalBlue);
+            view2.Text = "けいこく";
+
+            var CustomDialog = 
+            new Android.Support.V7.App.AlertDialog.Builder(Forms.Context)
+                .SetCustomTitle(view2)
                 .SetIcon(Resource.Drawable.buldogSample)
-                .SetNegativeButton(no, (o, e) => tcs.SetResult(new AlertResult
-                {
-                    AlertTitle = no,
-                }))
-                .SetPositiveButton(Yes, (o, e) => tcs.SetResult(new AlertResult
-                {
-                    AlertTitle = Yes,
-                }))
+                .SetView(view)
+                .SetPositiveButton(
+                "OK", (s, a) => { Console.WriteLine(""); })
+                .SetNegativeButton( //Cancelボタンの処理
+                "CANCEL", (s, a) => { Console.WriteLine(""); })
                 .Show();
+
+            var button1 = CustomDialog.GetButton(-1);
+            button1.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            button1.SetWidth(300);
+            button1.SetHeight(150);
+            button1.SetTextSize(ComplexUnitType.Px, 50);
+            button1.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            button1.SetTextColor(Android.Graphics.Color.RoyalBlue);
+
+            var button2 = CustomDialog.GetButton(-2);
+            button2.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            button2.SetWidth(300);
+            button2.SetHeight(150);
+            button2.SetTextSize(ComplexUnitType.Px, 50);
+            button2.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            button2.SetTextColor(Android.Graphics.Color.RoyalBlue);
+            button2.SetLineSpacing(100, 100);
+            button2.SetX(-190);
 
             return tcs.Task;
         }

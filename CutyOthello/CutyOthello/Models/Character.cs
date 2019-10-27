@@ -10,19 +10,21 @@ namespace CutyOthello.Models
         public string DogColor { get;  set; }
         public string DogName { get;  set; }
         public string DogOwnerName { get;  set; }
+        public string DogPicture { get; set; }
 
         public Character()
         {
             //SQLite使用時に必要
         }
 
-        public Character(int id, string dogType, string dogColor, string dogName, string dogOwnerName)
+        public Character(int id, string dogType, string dogColor, string dogName, string dogOwnerName,string dogPicture)
         {
             Id = id;
             DogType = dogType;
             DogColor = dogColor;
             DogName = dogName;
             DogOwnerName = dogOwnerName;
+            DogPicture = dogPicture;
         }
     }
 }
