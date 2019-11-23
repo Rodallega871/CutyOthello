@@ -9,19 +9,19 @@ namespace CutyOthello.Views
 {
     public class BoardView : AbsoluteLayout
     {
-            // Alternative sizes make the tiles a tad small.
-            const int COLS = 8;         // 16
-            const int ROWS = 8;         // 16
+        // Alternative sizes make the tiles a tad small.
+        const int COLS = 8;         // 8
+        const int ROWS = 8;         // 8
 
         // The array of tiles
         StoneView[,] stoneViews = new StoneView[ROWS, COLS];
-
+         
         public BoardView()
         {
             for (int row = 0; row < ROWS; row++)
                 for (int col = 0; col < COLS; col++)
                 {
-                    StoneView stoneView = new StoneView(row, col);
+                    StoneView stoneView = new StoneView(row, col,"","");
                     Children.Add(stoneView.OneStoneView);
                     stoneViews[row, col] = stoneView;
                 }

@@ -75,8 +75,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="buldogSample.png" Grid.Column="0" />
-                <Image Source="shiba.png" Grid.Column="1" />
-                <Image Source="buldogSample.png" Grid.Column="2" />
+                <Image Source="poodle.png" Grid.Column="1" />
+                <Image Source="shiba.png" Grid.Column="2" />
             </Grid>
         </Grid>
     </ContentPage.Content>

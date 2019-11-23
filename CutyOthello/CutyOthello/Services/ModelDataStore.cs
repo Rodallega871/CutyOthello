@@ -69,11 +69,11 @@ namespace CutyOthello.Services
         }
 
 
-        public async Task<bool> InsertToDB(T model)
+        public Task<bool> InsertToDB(T model)
         {
             connextSql.Insert(model);
 
-            return await Task.FromResult(true);
+            return Task.FromResult(true);
         }
 
         public Task<bool> InsertAllToDB()
@@ -86,6 +86,12 @@ namespace CutyOthello.Services
         {
             connextSql.Update(model);
             return await Task.FromResult(true);
+        }
+
+        public Task<bool> DeleteDB(T model)
+        {
+            connextSql.Delete(model);
+            return Task.FromResult(true);
         }
     }
 }

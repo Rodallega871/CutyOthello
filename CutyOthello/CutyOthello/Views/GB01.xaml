@@ -42,9 +42,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding TapScreen}"/>
-            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="31*"/>
@@ -62,7 +59,7 @@
                 </Frame>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
-                <ListView HasUnevenRows="True" ItemsSource="{Binding Path=testList}">
+                <ListView HasUnevenRows="True" ItemsSource="{Binding Path=testList}" SelectedItem="{Binding SelectedChara}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell Height="100">
@@ -81,7 +78,17 @@
             </Grid>
             <Grid Grid.Row="2" Grid.Column="1">
                 <Frame Style="{StaticResource FrameStyle}">
-                    <Label Style="{StaticResource LabelStyle}" Text="Player1                Player2"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Style="{StaticResource LabelStyle}" Text="Player1" Grid.Column="0"
+                               TextColor="{Binding Player1BoardColor}"/>
+                        <Label Style="{StaticResource LabelStyle}" Text="Player2" Grid.Column="2"
+                               TextColor="{Binding Player2BoardColor}"/>
+                    </Grid>
                 </Frame>
             </Grid>
             <Grid Grid.Row="3" Grid.Column="1">

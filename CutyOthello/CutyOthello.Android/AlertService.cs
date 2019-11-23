@@ -24,7 +24,7 @@ namespace CutyOthello.Droid
 {
     class AlertService : IAlertService
     {
-        public Task<AlertResult> Show(string title, string message, string Yes, string no)
+        public Task<AlertResult> ShowDialog(string title, string message,string Yes)
         {
             var tcs = new TaskCompletionSource<AlertResult>();
 
@@ -37,7 +37,7 @@ namespace CutyOthello.Droid
             view.SetTextSize(ComplexUnitType.Px, 50);
             view.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
             view.SetTextColor(Android.Graphics.Color.RoyalBlue);
-            view.Text = "データがありますが、つづきからはじめますか？";
+            view.Text = message;
 
             var view2 = new Android.Widget.TextView(Forms.Context);
             view2.SetBackgroundColor(Android.Graphics.Color.LightPink);
@@ -46,7 +46,52 @@ namespace CutyOthello.Droid
             view2.SetTextSize(ComplexUnitType.Px, 50);
             view2.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
             view2.SetTextColor(Android.Graphics.Color.RoyalBlue);
-            view2.Text = "けいこく";
+            view2.Text = title;
+
+            var CustomDialog =
+            new Android.Support.V7.App.AlertDialog.Builder(Forms.Context)
+                .SetCustomTitle(view2)
+                .SetIcon(Resource.Drawable.buldogSample)
+                .SetView(view)
+                .SetPositiveButton(
+                Yes, (s, a) => { Console.WriteLine(""); })
+                .Show();
+
+            var button1 = CustomDialog.GetButton(-1);
+            button1.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            button1.SetWidth(300);
+            button1.SetHeight(150);
+            button1.SetTextSize(ComplexUnitType.Px, 50);
+            button1.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            button1.SetTextColor(Android.Graphics.Color.RoyalBlue);
+
+            return tcs.Task;
+        }
+
+        public Task<AlertResult> ShowYesNoDialog(string title, string message, string Yes, string No)
+        {
+            var tcs = new TaskCompletionSource<AlertResult>();
+            AlertResult alertResult = new AlertResult();
+
+            Typeface typefaceOriginal = Typeface.CreateFromAsset(Forms.Context.Assets, "mini-wakuwaku-maru.otf");
+
+            var view = new Android.Widget.TextView(Forms.Context);
+            view.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            view.SetHeight(150);
+            view.SetWidth(200);
+            view.SetTextSize(ComplexUnitType.Px, 50);
+            view.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            view.SetTextColor(Android.Graphics.Color.RoyalBlue);
+            view.Text = message;
+
+            var view2 = new Android.Widget.TextView(Forms.Context);
+            view2.SetBackgroundColor(Android.Graphics.Color.LightPink);
+            view2.SetHeight(150);
+            view2.SetWidth(200);
+            view2.SetTextSize(ComplexUnitType.Px, 50);
+            view2.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
+            view2.SetTextColor(Android.Graphics.Color.RoyalBlue);
+            view2.Text = title;
 
             var CustomDialog = 
             new Android.Support.V7.App.AlertDialog.Builder(Forms.Context)
@@ -54,9 +99,9 @@ namespace CutyOthello.Droid
                 .SetIcon(Resource.Drawable.buldogSample)
                 .SetView(view)
                 .SetPositiveButton(
-                "OK", (s, a) => { Console.WriteLine(""); })
+                Yes, (s, a) => { alertResult.isYes = true; })
                 .SetNegativeButton( //Cancelボタンの処理
-                "CANCEL", (s, a) => { Console.WriteLine(""); })
+                No, (s, a) => { alertResult.isYes = false; })
                 .Show();
 
             var button1 = CustomDialog.GetButton(-1);
@@ -77,6 +122,7 @@ namespace CutyOthello.Droid
             button2.SetLineSpacing(100, 100);
             button2.SetX(-190);
 
+            tcs.SetResult(alertResult);
             return tcs.Task;
         }
     }

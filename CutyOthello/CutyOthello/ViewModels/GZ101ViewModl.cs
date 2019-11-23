@@ -17,7 +17,6 @@ namespace CutyOthello.ViewModels
             {
                 Application.Current.MainPage = new GZ102();
             });
-
         }
     }
 }

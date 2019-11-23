@@ -8,7 +8,6 @@ namespace CutyOthello.ViewModels
     {
         public GZ202ViewModel()
         {
-                
         }
     }
 }

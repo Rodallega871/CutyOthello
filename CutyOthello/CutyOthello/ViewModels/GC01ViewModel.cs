@@ -1,4 +1,6 @@
-﻿using CutyOthello.Models;
+﻿using CutyOthello.Commn;
+using CutyOthello.Models;
+using CutyOthello.Services;
 using CutyOthello.Views;
 using System;
 using System.Collections.Generic;
@@ -17,28 +19,48 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._testList, value); }
         }
 
+        private Character _SelectedChar;
+        public Character SelectedChar
+        {
+            get { return this._SelectedChar; }
+            set { this.SetProperty(ref this._SelectedChar, value); }
+        }
+
         public Command TapBackButton { get; }
         public Command TapCreaterNewCharacter { get; }
-        public Command SelectEditCharacter { get; }
+        public Command TapEditCharacter { get; }  
 
         public GC01ViewModel()
         {
-            testList = characterDataStore.GetItemsAsync(true);
+            testList = characterDataStore.GetDisplayItem();
 
             TapBackButton = new Command(() =>
             {
                 Application.Current.MainPage = new GZ102();
             });
 
-            SelectEditCharacter = new Command(() =>
+            TapEditCharacter = new Command(() =>
             {
-                Application.Current.MainPage = new GC02();
+                if (SelectedChar != null)
+                {
+                    //遷移方法を保管する
+                    userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.EditChara;
+                    //選択したキャラクター情報を保管する。
+                    characterDataStore.TempEditCharacter = SelectedChar;
+                    Application.Current.MainPage = new GC02();
+                }
+                else
+                {
+                    DependencyService.Get<IAlertService>().ShowDialog(
+                        "けいこく", "キャラクターをせんたくしてください。", "OK");
+                }
             });
             TapCreaterNewCharacter = new Command(() =>
             {
+                //遷移方法を保管する
+                userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.CreateNewChara;
                 Application.Current.MainPage = new GC02();
             });
-
         }
     }
 }

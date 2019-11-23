@@ -13,7 +13,7 @@ namespace CutyOthello.ViewModels
     {
         public UserDataStore userDataStore = DependencyService.Get<UserDataStore>() ?? new UserDataStore();
         public CharacterDataStore characterDataStore = DependencyService.Get<CharacterDataStore>() ?? new CharacterDataStore();
-
+       
         protected bool SetProperty<T>(ref T backingStore, T value,
     [CallerMemberName]string propertyName = "",
     Action onChanged = null)

@@ -9,6 +9,13 @@ namespace CutyOthello.Services
 {
     public class UserDataStore : ModelDataStore<User>
     {
+        public enum  EditOrCreaterCharaStatus
+        {
+            MainTitle,EditChara, CreateNewChara,SelectPlayerOne,SelectPlayerTwo,BattleDisp
+        };
+
+        //遷移方法ステータス
+        public Enum WaytoG02Status;
 
         public UserDataStore() : base()
         {

@@ -7,7 +7,8 @@ namespace CutyOthello.Commn
 {
     public interface IAlertService
     {
-        Task<AlertResult> Show(string title, string message,string Yes,string no);
+        Task<AlertResult> ShowDialog(string title, string message,string Yes);
+        Task<AlertResult> ShowYesNoDialog(string title, string message, string Yes, string no);
     }
 
     public class AlertResult
@@ -16,8 +17,7 @@ namespace CutyOthello.Commn
         public string AlertSentence { get; set; }
         public string Yes { get; set; }
         public string No { get; set; }
-        public bool isNo { get; set; }
-
+        public bool isYes { get; set; }
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using CutyOthello.Commn;
+using CutyOthello.Services;
 using CutyOthello.Views;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,8 @@ namespace CutyOthello.ViewModels
 
             ClickButtonGB01 = new Command(() =>
             {
+                //遷移方法を保管する
+                userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.SelectPlayerOne;
                 Application.Current.MainPage = new GB01();
             });
 
@@ -65,15 +68,15 @@ namespace CutyOthello.ViewModels
                 IsEnabledButtonGC01 = true;
 
                 //ポップアップを表示する。
-                var test = await DependencyService.Get<IAlertService>().Show(
-                    "Prain text", "Please enter text.", "OK", "Cancel");
+                var test = await DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                    "けいこく", "つづきからのデータがありますが、つづきからはじめますか？", "OK", "Cancel");
 
                 //ポップアップを表示する。
-                var select = await Application.Current.MainPage.DisplayAlert("テストアラート", "アラートです", "OK", "キャンセル");
-                if (select)
-                    await Application.Current.MainPage.DisplayAlert("テストアラート", "OKが選択されました", "終了");
-                else
-                    await Application.Current.MainPage.DisplayAlert("テストアラート", "キャンセルが選択されました", "終了");
+                //var select = await Application.Current.MainPage.DisplayAlert("テストアラート", "アラートです", "OK", "キャンセル");
+                //if (select)
+                //    await Application.Current.MainPage.DisplayAlert("テストアラート", "OKが選択されました", "終了");
+                //else
+                //    await Application.Current.MainPage.DisplayAlert("テストアラート", "キャンセルが選択されました", "終了");
             });
         }
     }

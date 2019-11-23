@@ -58,14 +58,15 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="2">
-                <Image Source="shiba.png" />
+                <Image Source="{Binding Player2Picture}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
                 <Frame Style="{StaticResource FrameStyle}">
-                    <Label Text="Hanako" Style="{StaticResource LabelStyle}" HorizontalOptions="End"/>
+                    <Label Text="{Binding Player2NameAndCount}" Style="{StaticResource LabelStyle}" HorizontalOptions="End"/>
                 </Frame>
             </Grid>
-            <local:BoardView x:Name="board" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <AbsoluteLayout x:Name="board" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1"/>
+            <!--<local:BoardView x:Name="board" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>-->
             <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
                 <Button Text="PASS" Style="{StaticResource ButtonStyle}" Command="{Binding TapPASSButton}"/>
             </Grid>
@@ -73,14 +74,15 @@
                 <Button Text="Surrender" Style="{StaticResource ButtonStyle}" Command="{Binding TapSurrenderButton}"/>
             </Grid>
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
-                <Button Text="TopMenu" Style="{StaticResource ButtonStyle}" Command="{Binding TapTopMenuButton}"/>
+                <!--<Button Text="TopMenu" Style="{StaticResource ButtonStyle}" Command="{Binding TapTopMenuButton}"/>-->
+                <Button Text="TopMenu" Style="{StaticResource ButtonStyle}" Clicked="TapTopMenuButton"/>
             </Grid>
             <Grid Grid.Row="4" Grid.RowSpan="2" Grid.Column="0">
-                <Image Source="buldogSample.png" />
+                <Image Source="{Binding Player1Picture}" />
             </Grid>
             <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
                 <Frame Style="{StaticResource FrameStyle}">
-                    <Label Text="Taro" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
+                    <Label Text="{Binding Player1NameAndCount}" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
                 </Frame>
             </Grid>
         </Grid>

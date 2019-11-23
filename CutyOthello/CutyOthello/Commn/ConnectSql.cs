@@ -50,6 +50,14 @@ namespace CutyOthello.Commn
             }
         }
 
+        public void Delete(Model model)
+        {
+            using (var db = new SQLite.SQLiteConnection(DbPath))
+            {
+                db.Delete(model);
+            }
+        }
+
         public ObservableCollection<User> SelectUser(StringBuilder builder, string[] StringHiretu)
         {
             ObservableCollection<User> model = new ObservableCollection<User>();
