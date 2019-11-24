@@ -11,7 +11,7 @@ namespace CutyOthello.Services
     {
         public enum  EditOrCreaterCharaStatus
         {
-            MainTitle,EditChara, CreateNewChara,SelectPlayerOne,SelectPlayerTwo,BattleDisp
+            MainTitle,EditChara, CreateNewChara,SelectPlayerOne,SelectPlayerTwo,BattleDisp,BattleResult
         };
 
         //遷移方法ステータス
@@ -38,5 +38,6 @@ namespace CutyOthello.Services
 
             return Task.FromResult(true);
         }
+
     }
 }

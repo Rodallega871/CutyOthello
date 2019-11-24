@@ -18,7 +18,7 @@ namespace CutyOthello.Views
         StoneView[,] stoneViews = new StoneView[8, 8];
 
         public GZ201()
-        {
+        {            
             //オセロ版ビュー生成
             board = new AbsoluteLayout();
 
@@ -67,10 +67,16 @@ namespace CutyOthello.Views
                         stoneViews[viewmodel.GetWhiteStoneList()[0][j], viewmodel.GetWhiteStoneList()[1][j]].ChangePlyerTwoView();
                     }
 
-                    //for (int k = 0; k < viewmodel.GetNextStoneList()[0].Count; k++)
-                    //{
-                    //    stoneViews[viewmodel.GetNextStoneList()[0][k], viewmodel.GetNextStoneList()[1][k]].ChangeNextView();
-                    //}
+                    for (int k = 0; k < viewmodel.GetNextStoneList()[0].Count; k++)
+                    {
+                        stoneViews[viewmodel.GetNextStoneList()[0][k], viewmodel.GetNextStoneList()[1][k]].ChangeNextView();
+                    }
+
+                    for (int k = 0; k < viewmodel.GetBlankList()[0].Count; k++)
+                    {
+                        stoneViews[viewmodel.GetBlankList()[0][k], viewmodel.GetBlankList()[1][k]].ChangeBlankView();
+                    }
+
                 }
             });
 
@@ -78,8 +84,20 @@ namespace CutyOthello.Views
 
         private void TapTopMenuButton(object sender, EventArgs e)
         {
-            MessagingCenter.Unsubscribe<StoneView, List<int>>(this, "Sending");
             viewmodel.ViewModelTapTopMenuButton();
+            MessagingCenter.Unsubscribe<StoneView, List<int>>(this, "Sending");
         }
+
+        private void TapNextGamen(object sender, EventArgs e)
+        {
+            viewmodel.ViewModelTapNextGamen();
+            MessagingCenter.Unsubscribe<StoneView, List<int>>(this, "Sending");
+        }
+
+        private void TapSurrenderButton(object sender, EventArgs e)
+        {
+            viewmodel.ViewModelTapSurrenderButton();
+            MessagingCenter.Unsubscribe<StoneView, List<int>>(this, "Sending");
+        }        
     }
     }

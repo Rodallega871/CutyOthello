@@ -5,11 +5,119 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CutyOthello.Views.GZ202" BackgroundColor="#FBF2DD">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Pink"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="mini-wakuwaku-maru" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="RoyalBlue"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontFamily" >
+                    <OnPlatform x:TypeArguments="x:String" >
+                        <On Platform="iOS" Value="mini-wakuwaku-maru" />
+                        <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
+                        <On Platform="UWP" Value="Modak" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="BorderRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="Pink"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Label Text="{Binding DisplayWinnerName}" Style="{StaticResource LabelStyle}" HorizontalOptions="Center"
+                           FontSize="Title"/>
+                </Frame>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Image Source="{Binding Player1DogImage}"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="2">
+                    <Frame Style="{StaticResource FrameStyle}" OutlineColor="{Binding PlayerOneOutLineColor}">
+                        <Label Text="{Binding Player1GotStoneCount}" Style="{StaticResource LabelStyle}" 
+                               HorizontalOptions="Start" VerticalOptions="Center" />
+                    </Frame>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Frame Style="{StaticResource FrameStyle}" OutlineColor="{Binding PlayerOneOutLineColor}">
+                        <Label Text="{Binding Player1Dogname}" Style="{StaticResource LabelStyle}" 
+                               HorizontalOptions="Center" TextColor="{Binding PlayerOneTextColor}"/>
+                    </Frame>
+                </Grid>
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Image Source="{Binding Player2DogImage}"/>
+                </Grid>
+                <Grid Grid.Row="3" Grid.Column="2">
+                    <Frame Style="{StaticResource FrameStyle}" OutlineColor="{Binding PlayerTwoOutLineColor}">
+                        <Label Text="{Binding Player2GotStoneCount}" Style="{StaticResource LabelStyle}" 
+                               HorizontalOptions="Start" VerticalOptions="Center" />
+                    </Frame>
+                </Grid>
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Frame Style="{StaticResource FrameStyle}" OutlineColor="{Binding PlayerTwoOutLineColor}">
+                        <Label Text="{Binding Player2Dogname}" Style="{StaticResource LabelStyle}" 
+                               HorizontalOptions="Center" TextColor="{Binding PlayerTwoTextColor}"/>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="TopMenu" Style="{StaticResource ButtonStyle}" Command="{Binding TapTopMenuButton}"/>
+                <Button Grid.Column="2" Text="NEXTSTAGE" Style="{StaticResource ButtonStyle}" Command="{Binding TapNextButton}" 
+                        IsEnabled="{Binding CanNextStage}"/>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
+
 </ContentPage>

@@ -199,8 +199,8 @@ namespace CutyOthello.Models
             var tmpBoard = new Board();
             tmpBoard.NowTurn = NowTurn;
             tmpBoard.NowIndex = NowIndex;
-            tmpBoard.playerBoard = playerBoard;
-            tmpBoard.opponentBoard = opponentBoard;
+            tmpBoard.playerBoard = opponentBoard;
+            tmpBoard.opponentBoard = playerBoard;
             var opponentLegalBoard = makeLegalBoard(board: tmpBoard);
 
             // 手番側だけがパスの場合    
@@ -216,8 +216,8 @@ namespace CutyOthello.Models
             var tmpBoard = new Board();
             tmpBoard.NowTurn = NowTurn;
             tmpBoard.NowIndex = NowIndex;
-            tmpBoard.playerBoard = playerBoard;
-            tmpBoard.opponentBoard = opponentBoard;
+            tmpBoard.playerBoard = opponentBoard;
+            tmpBoard.opponentBoard = playerBoard;
             var opponentLegalBoard = makeLegalBoard(board: tmpBoard);
 
             // 両手番とも置く場所がない場合    
@@ -225,31 +225,32 @@ namespace CutyOthello.Models
         }
 
 
-        public void getResult()
+        public int getResult(bool BlackOrWhite)
         {
-
-            //石数を取得
-            var blackScore = bitCount(playerBoard);
-            var whiteScore = bitCount(opponentBoard);
-
-            if (NowTurn == WhiteTurn)
+            if (BlackOrWhite)
             {
-                var tmp = blackScore;
-                blackScore = whiteScore;
-                whiteScore = tmp;
+                if (NowTurn == BlackTurn)
+                    return bitCount(playerBoard);
+                else
+                    return bitCount(opponentBoard);
+            }
+            else
+            {
+                if (NowTurn == WhiteTurn)
+                    return bitCount(playerBoard);
+                else
+                    return bitCount(opponentBoard);
             }
         }
 
         public List<List<int>> UintToListInt(UInt64 prmBoard)
         {
-            //var tmp = playerBoard;
             List<List<int>> retrunBoard = new List<List<int>>()
             {
                 new List<int>(), new List<int>()
-            }
-            ;
+            };
 
-            for (int i = 1; i < 64; i++)
+            for (int i = 0; i < 64; i++)
             {
                 if ((prmBoard >> 63 - i & 0b1) == 0b1)
                 {
@@ -257,7 +258,7 @@ namespace CutyOthello.Models
                     retrunBoard[1].Add(i % 8);
                 }
             }
-            return retrunBoard;///+-            
+            return retrunBoard;            
         }
 
         public List<List<int>> GetBlackBoard()
@@ -285,13 +286,18 @@ namespace CutyOthello.Models
             }
         }
 
+        public List<List<int>> GetBlankBoard()
+        {
+            return UintToListInt(~(playerBoard | opponentBoard | makeLegalBoard(this)));
+        }
+
         public int bitCount(UInt64 num)
         {
             UInt64 mask = 0x8000000000000000;
             int count = 0;
 
 
-            for (int i = 0; i > 64; i++)
+            for (int i = 0; i < 64; i++)
             {
 
                 if ((mask & num) != 0)

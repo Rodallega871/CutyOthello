@@ -12,8 +12,8 @@ namespace CutyOthello.ViewModels
 {
     class GZ201ViewModel : BaseViewModel
     {
-        public Command TapPASSButton { get; }
-        public Command TapSurrenderButton { get; }
+        //public Command TapPASSButton { get; }
+        //public Command TapSurrenderButton { get; }
         //public Command TapTopMenuButton { get; }
 
         private ObservableCollection<Character> _testList;
@@ -51,18 +51,56 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._Player2Picture, value); }
         }
 
+        private string _PlayerOneTextColor;
+        public string PlayerOneTextColor
+        {
+            get { return this._PlayerOneTextColor; }
+            set { this.SetProperty(ref this._PlayerOneTextColor, value); }
+        }
+
+        private string _PlayerTwoTextColor;
+        public string PlayerTwoTextColor
+        {
+            get { return this._PlayerTwoTextColor; }
+            set { this.SetProperty(ref this._PlayerTwoTextColor, value); }
+        }
+
+        private string _PlayerOneOutlineColor;
+        public string PlayerOneOutlineColor
+        {
+            get { return this._PlayerOneOutlineColor; }
+            set { this.SetProperty(ref this._PlayerOneOutlineColor, value); }
+        }
+
+        private string _PlayerTwoOutlineColor;
+        public string PlayerTwoOutlineColor
+        {
+            get { return this._PlayerTwoOutlineColor; }
+            set { this.SetProperty(ref this._PlayerTwoOutlineColor, value); }
+        }
+
+        private bool _CanFinishGame;
+        public bool CanFinishGame
+        {
+            get { return this._CanFinishGame; }
+            set { this.SetProperty(ref this._CanFinishGame, value); }
+        }
+        
         OthelloMain othelloMain;
 
         public GZ201ViewModel()
         {
+            PlayerOneTextColor = "Red";
+            PlayerOneOutlineColor = "Red";
             Player1NameAndCount = characterDataStore.PlayerOne.DogName;
             Player1Picture = characterDataStore.PlayerOne.DogPicture;
             Player2NameAndCount = characterDataStore.PlayerTwo.DogName;
             Player2Picture = characterDataStore.PlayerTwo.DogPicture;
+            CanFinishGame = false;
 
             othelloMain = new OthelloMain();
 
-            //購読解除がうまく設定できない
+            //購読解除がうまく設定できないからバインディング挫折
             //TapTopMenuButton = new Command(() =>
             //{
             //    Player1NameAndCount = null;
@@ -76,15 +114,29 @@ namespace CutyOthello.ViewModels
 
         public void ViewModelTapTopMenuButton()
         {
-            Player1NameAndCount = null;
-            Player1Picture = null;
-            Player2NameAndCount = null;
-            Player2Picture = null;
             userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.MainTitle;
             Application.Current.MainPage = new GZ102();
         }
 
+        public void ViewModelTapNextGamen()
+        {
+            userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.BattleResult;
+            characterDataStore.PlayerOneCount = GetBlackStoneList()[0].Count;
+            characterDataStore.PlayerTwoCount = GetWhiteStoneList()[0].Count;
+            Application.Current.MainPage = new GZ202();
+        }
 
+        public void ViewModelTapSurrenderButton()
+        {
+            //ポップアップを表示する。(タップした場所が適切でない場合)
+            DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                "とちゅうしゅうりょう", "こうさんしました。", "OK", "Cancel");
+
+            userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.BattleResult;
+            characterDataStore.PlayerOneCount = GetBlackStoneList()[0].Count;
+            characterDataStore.PlayerTwoCount = GetWhiteStoneList()[0].Count;
+            Application.Current.MainPage = new GZ202();
+        }
 
         public bool DammyModel(int row,int col)
         {
@@ -95,29 +147,37 @@ namespace CutyOthello.ViewModels
                     "けいこく", "そこにいしはおけません。", "OK", "Cancel");
                 return false;
             }
-            othelloMain.Check();
+
+            //パスチェック
+            if (othelloMain.IsPass())
+            {
+                //ポップアップを表示する。(タップした場所が適切でない場合)
+                DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                    "けいこく", "おけるばしょがないので、パスします。", "OK", "Cancel");
+            }
+            else
+            {
+                PlayerOneTextColor = PlayerOneTextColor == "Red" ? "RoyalBlue" : "Red";
+                PlayerOneOutlineColor = PlayerOneOutlineColor == "Red" ? "Pink" : "Red";
+                PlayerTwoTextColor = PlayerTwoTextColor == "Red" ? "RoyalBlue" : "Red";
+                PlayerTwoOutlineColor = PlayerTwoOutlineColor == "Red" ? "Pink" : "Red";
+            }
+
+            //ゲーム終了チェック
+            if (othelloMain.IsGameFinished())
+            {
+                //ポップアップを表示する。(タップした場所が適切でない場合)
+                DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                    "ゲームしゅうりょう", "けっかしゅうけいちゅうです。GameFinishボタンをおしてください。", "OK", "Cancel");
+
+                CanFinishGame = true;
+            }
+
+            //表示用の石獲得数を表示
+            Player1NameAndCount = characterDataStore.PlayerOne.DogName + "   "  + othelloMain.GetBlackStoneCount();
+            Player2NameAndCount = characterDataStore.PlayerTwo.DogName + "   "  + othelloMain.GetWhiteStoneCount();
 
             return true;
-
-            ////入力
-            //if (a == 0 && b == 0)
-            //{
-            //    //ポップアップを表示する。(タップした場所が適切でない場合)
-            //    DependencyService.Get<IAlertService>().ShowYesNoDialog(                
-            //        "けいこく", "そこにいしはおけません。", "OK", "Cancel");
-            //    return new List<List<int>> { };
-            //}
-            //else if (a == 0)
-            //{
-            //    //ポップアップを表示する。(パスする)
-            //    DependencyService.Get<IAlertService>().ShowYesNoDialog(
-            //        "けいこく", "いしがおけないのでパスします", "OK", "Cancel");
-            //    return new List<List<int>> { };
-            //}
-            //else
-            //{
-            //    return new List<List<int>> { };
-            //}
         }
 
         public List<List<int>> GetBlackStoneList()
@@ -133,6 +193,11 @@ namespace CutyOthello.ViewModels
         public List<List<int>> GetNextStoneList()
         {
             return othelloMain.GetNextStoneList();
+        }  
+
+        public List<List<int>> GetBlankList()
+        {
+            return othelloMain.GetBlankList();
         }
 
     }

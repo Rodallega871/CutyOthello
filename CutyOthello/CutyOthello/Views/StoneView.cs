@@ -51,7 +51,8 @@ namespace CutyOthello.Views
                 Content = tmp,
                 BackgroundColor = Color.PaleGreen,
                 BorderColor = Color.LightGray,
-                Padding = new Thickness(5,5,5,5)
+                Padding = new Thickness(5, 5, 5, 5),
+                HasShadow = false
             };
 
             singleTap = new TapGestureRecognizer
@@ -83,6 +84,11 @@ namespace CutyOthello.Views
         public void ChangeNextView()
         {
             OneStoneView.Content = NextCanPutImage;
+        }
+
+        public void ChangeBlankView()
+        {
+            OneStoneView.Content = null;
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using CutyOthello.Models;
+﻿using CutyOthello.Commn;
+using CutyOthello.Models;
 using CutyOthello.Services;
 using CutyOthello.Views;
 using System;
@@ -95,6 +96,13 @@ namespace CutyOthello.ViewModels
                             userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.SelectPlayerTwo;
                             Application.Current.MainPage = new GB01();
                         }
+                        else
+                        {
+                            //ポップアップを表示する。(タップした場所が適切でない場合)
+                            DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                                "けいこく", "PLAYER1のキャラクターをえらんでください。", "OK", "Cancel");
+
+                        }
                         break;
                     case UserDataStore.EditOrCreaterCharaStatus.SelectPlayerTwo:
                         if (SelectedChara != null)
@@ -105,6 +113,13 @@ namespace CutyOthello.ViewModels
                             userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.BattleDisp;
                             Application.Current.MainPage = new GZ201();
                         }
+                        else
+                        {
+                            //ポップアップを表示する。(タップした場所が適切でない場合)
+                            DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                                "けいこく", "PLAYER2のキャラクターをえらんでください。", "OK", "Cancel");
+                        }
+
                         break;
                     default:
                         break;

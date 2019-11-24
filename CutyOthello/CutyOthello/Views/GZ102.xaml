@@ -7,10 +7,10 @@
         <ResourceDictionary>
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="TextColor" Value="RoyalBlue"/>
-                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="FontFamily" >
                     <OnPlatform x:TypeArguments="x:String" >
-                        <On Platform="iOS" Value="Modak" />
+                        <On Platform="iOS" Value="mini-wakuwaku-maru" />
                         <On Platform="Android" Value="mini-wakuwaku-maru.otf#mini-わくわくマル" />
                         <On Platform="UWP" Value="Modak" />
                     </OnPlatform>

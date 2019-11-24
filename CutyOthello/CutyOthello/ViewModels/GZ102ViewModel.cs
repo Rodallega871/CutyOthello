@@ -39,9 +39,9 @@ namespace CutyOthello.ViewModels
 
         public GZ102ViewModel()
         {
-            IsEnabledButtonGA01 = false;
-            IsEnabledButtonGB01 = false;
-            IsEnabledButtonGC01 = false;
+            IsEnabledButtonGA01 = true;
+            IsEnabledButtonGB01 = true;
+            IsEnabledButtonGC01 = true;
 
             ClickButtonGA01 = new Command(() =>
             {
@@ -60,24 +60,6 @@ namespace CutyOthello.ViewModels
                 Application.Current.MainPage = new GC01();
             });
 
-            FirstScreenTap = new Command(async() =>
-            {
-                //ボタンを活性にする
-                IsEnabledButtonGA01 = true;
-                IsEnabledButtonGB01 = true;
-                IsEnabledButtonGC01 = true;
-
-                //ポップアップを表示する。
-                var test = await DependencyService.Get<IAlertService>().ShowYesNoDialog(
-                    "けいこく", "つづきからのデータがありますが、つづきからはじめますか？", "OK", "Cancel");
-
-                //ポップアップを表示する。
-                //var select = await Application.Current.MainPage.DisplayAlert("テストアラート", "アラートです", "OK", "キャンセル");
-                //if (select)
-                //    await Application.Current.MainPage.DisplayAlert("テストアラート", "OKが選択されました", "終了");
-                //else
-                //    await Application.Current.MainPage.DisplayAlert("テストアラート", "キャンセルが選択されました", "終了");
-            });
         }
     }
 }

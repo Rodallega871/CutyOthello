@@ -21,6 +21,10 @@ namespace CutyOthello.Services
         public Character PlayerOne { get; set; }
         //対戦用キャラクター保管
         public Character PlayerTwo { get; set; }
+        //対戦用キャラクター取得石数
+        public int PlayerOneCount { get; set; }
+        //対戦用キャラクター取得石数
+        public int PlayerTwoCount { get; set; }
 
         public CharacterDataStore() : base()
         {
@@ -31,18 +35,19 @@ namespace CutyOthello.Services
         {
             models = new ObservableCollection<Character>
             {
-               new Character(id:0,dogType:"A",dogColor:"0",dogName:"Hanako",dogOwnerName:"A",dogPicture:"shiba.png",false),
-               new Character(id:1,dogType:"B",dogColor:"0",dogName:"Taro",dogOwnerName:"B",dogPicture:"poodle.png",false),
-               new Character(id:2,dogType:"C",dogColor:"0",dogName:"Suguru",dogOwnerName:"C",dogPicture:"buldogSample.png",false),
-               new Character(id:3,dogType:"D",dogColor:"0",dogName:"Inumi",dogOwnerName:"D",dogPicture:"PIG.png",false),
-               new Character(id:4,dogType:"E",dogColor:"0",dogName:"Kirin",dogOwnerName:"E",dogPicture:"Giraffe.png",false),
-               new Character(id:5,dogType:"F",dogColor:"0",dogName:"Ele",dogOwnerName:"F",dogPicture:"Eephant.png",false),
-               new Character(id:6,dogType:"G",dogColor:"0",dogName:"CowCow",dogOwnerName:"G",dogPicture:"Cow.png",false),
-               new Character(id:8,dogType:"H",dogColor:"0",dogName:"Robo",dogOwnerName:"I",dogPicture:"Robo.png",false),
-               new Character(id:9,dogType:"I",dogColor:"0",dogName:"Master",dogOwnerName:"J",dogPicture:"OthlloMaster.png",false)
-               //テスト用
-               ,new Character(id:10,dogType:"I",dogColor:"0",dogName:"ZEN",dogOwnerName:"J",dogPicture:"shiba.png",true)
-               ,new Character(id:11,dogType:"I",dogColor:"0",dogName:"Cotton",dogOwnerName:"J",dogPicture:"poodle.png",true)
+                new Character{Id = 0, DogType ="A",DogColor = "0",DogName = "Hanako",DogOwnerName = "A",DogPicture = "shiba.png",IsDisplay = false },
+                new Character{Id = 0,DogType = "A",DogColor = "0",DogName = "Hanako",DogOwnerName = "A",DogPicture = "shiba.png",IsDisplay = false},
+                new Character{Id = 1,DogType = "B",DogColor = "0",DogName = "Taro",DogOwnerName = "B",DogPicture = "poodle.png",IsDisplay = false},
+                new Character{Id = 2,DogType = "C",DogColor = "0",DogName = "Suguru",DogOwnerName = "C",DogPicture = "buldogSample.png",IsDisplay = false},
+                new Character{Id = 3,DogType = "D",DogColor = "0",DogName = "Inumi",DogOwnerName = "D",DogPicture = "PIG.png",IsDisplay = false},
+                new Character{Id = 4,DogType = "E",DogColor = "0",DogName = "Kirin",DogOwnerName = "E",DogPicture = "Giraffe.png",IsDisplay = false},
+                new Character{Id = 5,DogType = "F",DogColor = "0",DogName = "Ele",DogOwnerName = "F",DogPicture = "Eephant.png",IsDisplay = false},
+                new Character{Id = 6,DogType = "G",DogColor = "0",DogName = "CowCow",DogOwnerName = "G",DogPicture = "Cow.png",IsDisplay = false},
+                new Character{Id = 8,DogType = "H",DogColor = "0",DogName = "Robo",DogOwnerName = "I",DogPicture = "Robo.png",IsDisplay = false},
+                new Character{Id = 9,DogType = "I",DogColor = "0",DogName = "Master",DogOwnerName = "J",DogPicture = "OthlloMaster.png",IsDisplay = false}
+                //テスト用
+               //,new Character(id:10,dogType:"I",dogColor:"0",dogName:"ZEN",dogOwnerName:"J",dogPicture:"shiba.png",true)
+               //,new Character(id:11,dogType:"I",dogColor:"0",dogName:"Cotton",dogOwnerName:"J",dogPicture:"poodle.png",true)
             };
             return Task.FromResult(true);
         }
@@ -91,8 +96,16 @@ namespace CutyOthello.Services
         {
             if (!ValidationRegister(registerName, registerOwnerName))
             {
-                TempEditCharacter = new Character(dogName: registerName, dogOwnerName: registerOwnerName, dogPicture: characteImage,
-                    isDisplay: true,id: 0, dogColor: "", dogType: "");
+                TempEditCharacter = new Character
+                {
+                    DogName = registerName,
+                    DogOwnerName = registerOwnerName,
+                    DogPicture = characteImage,
+                    IsDisplay = true,
+                    Id = 0,
+                    DogColor = "",
+                    DogType = ""
+                };
                 await InsertToDB(TempEditCharacter);
                 models.Add(TempEditCharacter);
                 TempEditCharacter = null;

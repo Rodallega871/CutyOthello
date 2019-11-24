@@ -157,5 +157,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\RightYajirushi.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CutyOthelloIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

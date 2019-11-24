@@ -11,7 +11,7 @@ using Android.Graphics;
 
 namespace CutyOthello.Droid
 {
-    [Activity(Label = "CutyOthello", Icon = "@drawable/buldogSample", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "CutyOthello", Icon = "@drawable/CutyOthelloIcon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 

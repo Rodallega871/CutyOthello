@@ -12,21 +12,5 @@ namespace CutyOthello.Models
         public string BattleModeInfo { get;  set; }
         public string StoryBoardInfo { get;  set; }
         public string BattleBoardInfo{ get;  set; }
-
-        public User()
-        {
-            //SQLite使用時に必要
-        }
-
-        public User(bool dammy)
-        {
-            Id = 0;
-            GameStatus = "I";
-            CompleteCount = 0;
-            StoryModeInfo = "";
-            BattleModeInfo = "";
-            StoryBoardInfo = "";
-            BattleBoardInfo = "";
-        }
     }
 }

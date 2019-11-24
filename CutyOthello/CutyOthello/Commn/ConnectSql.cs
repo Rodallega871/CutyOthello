@@ -9,7 +9,7 @@ using SQLite;
 
 namespace CutyOthello.Commn
 {
-    public class ConnectSql<T> where T :Model
+    public class ConnectSql<T> where T : Model
     {
         public string DbPath { get; private set; }
 
@@ -76,14 +76,13 @@ namespace CutyOthello.Commn
             ObservableCollection<Character> model = new ObservableCollection<Character>();
 
             using (var db = new SQLite.SQLiteConnection(DbPath))
+
             {
                 SQLiteCommand command = new SQLiteCommand(db);
                 command.CommandText = builder.ToString();
                 command.ExecuteQuery<Character>().ForEach(character => { model.Add(character); });
-
             }
             return model;
         }
-
     }
 }

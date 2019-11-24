@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CutyOthello.Android", "Cuty
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CutyOthello.iOS", "CutyOthello\CutyOthello.iOS\CutyOthello.iOS.csproj", "{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CutyOthello", "CutyOthello\CutyOthello\CutyOthello.csproj", "{D8C9B8FD-822A-41B8-BE94-FE52DED4EAE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CutyOthello", "CutyOthello\CutyOthello\CutyOthello.csproj", "{D8C9B8FD-822A-41B8-BE94-FE52DED4EAE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,9 +105,9 @@ Global
 		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
 		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|ARM.Build.0 = Debug|iPhoneSimulator
 		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|ARM.Deploy.0 = Debug|iPhoneSimulator
-		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhone.Build.0 = Debug|iPhone
-		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhone.Deploy.0 = Debug|iPhone
+		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhone.ActiveCfg = Release|iPhone
+		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhone.Build.0 = Release|iPhone
+		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhone.Deploy.0 = Release|iPhone
 		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{65782D88-79F4-44CB-B0BD-EF8571B1E0F4}.Debug|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator

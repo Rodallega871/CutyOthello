@@ -28,20 +28,21 @@ namespace CutyOthello.Services
             {
                 return false;
             }
-
         }
 
-        public void Check()
+        public bool IsPass()
         {
             if (board.isPass())
             {
                 board.swapBoard();
+                return true;
             }
+            return false;
+        }
 
-            if (board.isGameFinished())
-            {
-                board.getResult();
-            }
+        public bool IsGameFinished()
+        {
+            return board.isGameFinished();
         }
 
         public List<List<int>> GetBlackStoneList()
@@ -56,9 +57,22 @@ namespace CutyOthello.Services
 
         public List<List<int>> GetNextStoneList()
         {
-
             return board.UintToListInt(board.makeLegalBoard(board));
-
         }
-}
+
+        public List<List<int>> GetBlankList()
+        {
+            return board.GetBlankBoard();
+        }
+
+        public int GetBlackStoneCount()
+        {
+            return board.getResult(true); //true : Black            
+        }
+
+        public int GetWhiteStoneCount()
+        {
+            return board.getResult(false); //false : White            
+        }
+    }
 }

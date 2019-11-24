@@ -12,11 +12,10 @@ namespace CutyOthello.ViewModels
 
         public GZ101ViewModl()
         {
-
             TapScreen = new Command(() =>
             {
                 Application.Current.MainPage = new GZ102();
             });
         }
-    }
+   }
 }

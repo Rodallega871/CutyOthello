@@ -117,6 +117,8 @@ namespace CutyOthello.ViewModels
                         var result2 = await characterDataStore.UpdateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
                         if (result2)
                         {
+                            await DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                                "かんりょう", "キャラクターデータをへんこうしました。", "OK", "Cancel");
                             Application.Current.MainPage = new GC01();
                         }
                         break;
@@ -124,6 +126,8 @@ namespace CutyOthello.ViewModels
                         var result3 = await characterDataStore.CreateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
                         if (result3)
                         {
+                            await DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                                "かんりょう", "キャラクターをとうろくしました。", "OK", "Cancel");
                             Application.Current.MainPage = new GC01();
                         }
                         break;
