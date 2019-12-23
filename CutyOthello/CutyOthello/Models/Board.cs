@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace CutyOthello.Models
@@ -7,13 +8,15 @@ namespace CutyOthello.Models
     class Board
     {
         bool NowTurn;
+        bool AITurn;
         int NowIndex;
         static readonly bool BlackTurn = true;
         static readonly bool WhiteTurn = false;
-
+        public int SakiyomiNum = 1;
 
         UInt64 playerBoard;
         UInt64 opponentBoard;
+        public UInt64 OptimalBoard;
 
         public Board()
         {
@@ -21,6 +24,11 @@ namespace CutyOthello.Models
             NowIndex = 1;
             playerBoard = 0x0000000810000000;
             opponentBoard = 0x0000001008000000;
+        }
+
+        public void setSakiyomiNum(int LevelInfo)
+        {
+            SakiyomiNum = LevelInfo;
         }
 
         /// <summary>
@@ -164,6 +172,36 @@ namespace CutyOthello.Models
             NowIndex = NowIndex + 1;
         }
 
+        public UInt64[] reverse(UInt64 put, Board board)
+        {
+            UInt64 rev = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                UInt64 rev_ = 0;
+                UInt64 mask = transfer(put: put, ReverseDirection: i);
+                //ブランクではない且つ相手の石が置かれている。
+                while ((mask != 0) && ((mask & board.opponentBoard) != 0))
+                {
+                    rev_ |= mask;
+                    mask = transfer(put: mask, ReverseDirection: i);
+                }
+                //自分の石が置かれていないこと
+                if ((mask & board.playerBoard) != 0)
+                {
+                    rev |= rev_;
+                }
+            }
+
+            //反転した後のUint64を返す。
+            return new UInt64[]
+            {
+                board.playerBoard ^ put | rev,
+                board.opponentBoard ^ rev
+            };
+        }
+
+
+
         public UInt64 transfer(UInt64 put, int ReverseDirection)
         {
             switch (ReverseDirection)
@@ -258,7 +296,7 @@ namespace CutyOthello.Models
                     retrunBoard[1].Add(i % 8);
                 }
             }
-            return retrunBoard;            
+            return retrunBoard;
         }
 
         public List<List<int>> GetBlackBoard()
@@ -296,7 +334,6 @@ namespace CutyOthello.Models
             UInt64 mask = 0x8000000000000000;
             int count = 0;
 
-
             for (int i = 0; i < 64; i++)
             {
 
@@ -307,6 +344,122 @@ namespace CutyOthello.Models
                 mask = mask >> 1;
             }
             return count;
+        }
+
+        /// <summary>
+        /// 局面を評価し点数で返す。
+        /// </summary>
+        /// <param name="PlayerB"></param>
+        /// <param name="OpponentB"></param>
+        /// <returns></returns>
+        public int assessBoad(UInt64 PlayerB, UInt64 OpponentB)
+        {
+            int Point = 0;
+
+            UInt64 StaticEvaluation8Board = 0x8100000000000081;
+            UInt64 StaticEvaluation3Board = 0x3c0081818181003c;
+            UInt64 StaticEvaluation2Board = 0x003c424242423c00;
+            UInt64 StaticEvaluation1Board = 0x00423c3c3c3c4200;
+            UInt64 StaticEvaluationMinus2Board = 0x4281000000008142;
+
+            Point += bitCount(PlayerB & StaticEvaluation8Board) * 8;
+            Point += bitCount(PlayerB & StaticEvaluation3Board) * 3;
+            Point += bitCount(PlayerB & StaticEvaluation2Board) * 2;
+            Point += bitCount(PlayerB & StaticEvaluation1Board);
+            Point += bitCount(PlayerB & StaticEvaluationMinus2Board) * -2;
+            Point -= bitCount(OpponentB & StaticEvaluation8Board) * 8;
+            Point -= bitCount(OpponentB & StaticEvaluation3Board) * 3;
+            Point -= bitCount(OpponentB & StaticEvaluation2Board) * 2;
+            Point -= bitCount(OpponentB & StaticEvaluation1Board);
+            Point -= bitCount(OpponentB & StaticEvaluationMinus2Board) * -2;
+
+            //Console.WriteLine("点数　：　"　+　Point);
+            return Point;
+        }
+
+        public void StartUpMinMax()
+        {
+            //var sw = new System.Diagnostics.Stopwatch();
+            //sw.Start();
+            OptimalBoard = 0;
+            MinMax(playerBoard,opponentBoard, SakiyomiNum, false);
+            //sw.Stop();
+            //TimeSpan ts = sw.Elapsed;
+            //Console.WriteLine($"時間：　{ts}");
+        }
+
+
+        /// <summary>
+        /// ミニマックス法により最適な手を返す。
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <param name="Oppponent"></param>
+        /// <param name="turn"></param>
+        /// <param name="depth"></param>
+        public int MinMax(UInt64 PlayerB, UInt64 OpponentB, int depth,bool SaikiHantei = true)
+        {
+            //葉の場合、評価値を返す。
+            if (depth == 0) return assessBoad(PlayerB, OpponentB);
+
+            // 相手側の合法手ボードを生成    
+            var tmpBoard = new Board();
+            if (SaikiHantei)
+            {
+                tmpBoard.playerBoard = OpponentB;
+                tmpBoard.opponentBoard = PlayerB;
+            }
+            else
+            {
+                tmpBoard.playerBoard = PlayerB;
+                tmpBoard.opponentBoard = OpponentB;
+            }
+            var opponentLegalBoard = makeLegalBoard(board: tmpBoard);
+
+            int best = -3000;
+            int worst = 3000;
+
+            //x=1 y=1 の石をスタートとする。。
+            UInt64 put = 0x8000000000000000;
+            
+            for (int i = 1; i < 64; i++)
+            {
+                if ((put & opponentLegalBoard) == put)
+                {
+                    //ConsoleWriteLine(depth, put);
+                    var Board = this.reverse(put, tmpBoard);
+                    //Console.WriteLine("リバース開始");
+                    //ConsoleWriteLine(depth, Board[0]);
+                    //ConsoleWriteLine(depth, Board[1]);
+                    //Console.WriteLine("リバース終了");
+                    var val = MinMax(Board[0], Board[1], depth - 1);
+
+                    if (depth % 2 == 1 && best < val)
+                    {
+                        best = val;
+                        if(depth == SakiyomiNum)
+                            OptimalBoard = put;
+                    }
+                    else if (depth % 2 == 0 && worst > val)
+                    {
+                        worst = val;
+                    }
+                }
+                put = put >> 1;
+            }
+
+            return depth % 2 == 1 ? best : worst;
+        }
+
+        [Conditional("DEBUG")]
+        private void ConsoleWriteLine(int depth, UInt64 put)
+        {
+            for (int i = 0; i < 64; i++)
+            {
+                if ((put >> 63 - i & 0b1) == 0b1)
+                {
+                    System.Diagnostics.Debug.WriteLine("現在の手数　：" + NowIndex + " 　　ターン：" + NowTurn.ToString() + "     深さ :" + depth + "    row :" + i / 8 + "　　col :" + i % 8); ;
+                }
+            }
         }
     }
 }

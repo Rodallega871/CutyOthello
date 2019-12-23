@@ -29,6 +29,12 @@ namespace CutyOthello.Services
                 return false;
             }
         }
+        public void PutStoneCPU()
+        {
+            board.StartUpMinMax();
+            board.reverse(board.OptimalBoard);
+            board.swapBoard();
+        }
 
         public bool IsPass()
         {
@@ -74,5 +80,11 @@ namespace CutyOthello.Services
         {
             return board.getResult(false); //false : White            
         }
+
+        public void SetCpuLevel(int LevelInfo)
+        {
+            board.setSakiyomiNum(LevelInfo * 2 - 1);
+        }
+
     }
 }

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CutyOthello.Views.GA01" BackgroundColor="#FBF2DD">
+             x:Class="CutyOthello.Views.GB02"  BackgroundColor="#FBF2DD">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="FrameStyle" TargetType="Frame">
@@ -46,16 +46,18 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="8*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -65,64 +67,69 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="1">
                 <Frame Style="{StaticResource FrameStyle}" >
-                    <Label Text="Story Mode" Style="{StaticResource LabelStyle}"/>
+                    <Label Text="Battle Mode Select" Style="{StaticResource LabelStyle}"/>
                 </Frame>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="1">
-                <Frame Style="{StaticResource FrameStyle}" >
-                    <Label Text="{Binding StageNo}" Style="{StaticResource LabelStyle}"/>
-                </Frame>
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Text="Player VS Player"  Command="{Binding TapPlayerVSPlayerButton}"/>
             </Grid>
-            <Grid Grid.Row="4" Grid.Column="1">
-                <Frame Style="{StaticResource FrameStyle}" >
-                    <Label Text="Opponent Character" Style="{StaticResource LabelStyle}"/>
-                </Frame>
+                <Grid Grid.Row="3" Grid.Column="1" BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="buldogSample.png" />
+                <Image Grid.Column="1" Source="shiba.png"/>
             </Grid>
-            <Grid Grid.Row="6" Grid.Column="1">
+            <Grid Grid.Row="5" Grid.Column="1">
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Text="Player VS CPU (●)"  Command="{Binding TapCPUVSPlayerButton}"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.Column="1" BackgroundColor="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Frame Grid.Column="0" Grid.Row="0" Style="{StaticResource FrameStyle}" >
-                    <Label Text="Character Name" Style="{StaticResource LabelStyle}"/>
-                </Frame>
-                <Frame Grid.Column="0" Grid.Row="1" Style="{StaticResource FrameStyle}" BackgroundColor="White">
-                    <Label Text="{Binding OpponentCharaName}" Style="{StaticResource LabelStyle}" BackgroundColor="White"/>
-                </Frame>
-                <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="{Binding OpponentCharaImage}"/>
+                <Image Grid.Column="0" Source="buldogSample.png" />
+                <Image Grid.Column="1" Source="Robo.png"/>
             </Grid>
             <Grid Grid.Row="8" Grid.Column="1">
-                <Frame Style="{StaticResource FrameStyle}" >
-                    <Label Text="Level" Style="{StaticResource LabelStyle}"/>
-                </Frame>
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Text="CPU VS Player (○)"  Command="{Binding TapPlayerVSCPUButton}"/>
             </Grid>
             <Grid Grid.Row="9" Grid.Column="1" BackgroundColor="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="Robo.png" />
+                <Image Grid.Column="1" Source="buldogSample.png"/>
+            </Grid>
+            <Grid Grid.Row="11" Grid.Column="1">
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Text="CPU Level Select"  Command="{Binding TapLevelSelectButton}"/>
+            </Grid>
+            <Grid Grid.Row="12" Grid.Column="1" BackgroundColor="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
                 <Image Source="Star.png" Grid.Column="0"/>
                 <Image Source="{Binding CPULevelImage2}" Grid.Column="1"/>
                 <Image Source="{Binding CPULevelImage3}" Grid.Column="2"/>
                 <Image Source="{Binding CPULevelImage4}" Grid.Column="3"/>
                 <Image Source="{Binding CPULevelImage5}" Grid.Column="4"/>
             </Grid>
-            <Grid Grid.Row="11" Grid.Column="1">
+            <Grid Grid.Row="13" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Text="BACK"  Command="{Binding TapBackButton}"/>
-                <Button Style="{StaticResource ButtonStyle}"  Grid.Column="2" Text="OK"  Command="{Binding TapOKButton}"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

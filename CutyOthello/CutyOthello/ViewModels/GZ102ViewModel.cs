@@ -51,8 +51,8 @@ namespace CutyOthello.ViewModels
             ClickButtonGB01 = new Command(() =>
             {
                 //遷移方法を保管する
-                userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.SelectPlayerOne;
-                Application.Current.MainPage = new GB01();
+                userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.BattleModeSelect;
+                Application.Current.MainPage = new GB02();
             });
 
             ClickButtonGC01 = new Command(() =>

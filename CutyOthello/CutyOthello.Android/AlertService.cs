@@ -24,9 +24,11 @@ namespace CutyOthello.Droid
 {
     class AlertService : IAlertService
     {
-        public Task<AlertResult> ShowDialog(string title, string message,string Yes)
+        public async Task<AlertResult> ShowDialog(string title, string message,string Yes)
         {
             var tcs = new TaskCompletionSource<AlertResult>();
+            AlertResult AR = new AlertResult();
+
 
             Typeface typefaceOriginal = Typeface.CreateFromAsset(Forms.Context.Assets, "mini-wakuwaku-maru.otf");
 
@@ -54,7 +56,10 @@ namespace CutyOthello.Droid
                 .SetIcon(Resource.Drawable.buldogSample)
                 .SetView(view)
                 .SetPositiveButton(
-                Yes, (s, a) => { Console.WriteLine(""); })
+                Yes, async (s, a) => { await Task.Run(() => {
+                    AR.isYes = true;
+                    tcs.SetResult(AR);
+                }); })
                 .Show();
 
             var button1 = CustomDialog.GetButton(-1);
@@ -65,10 +70,10 @@ namespace CutyOthello.Droid
             button1.SetTypeface(typefaceOriginal, TypefaceStyle.Normal);
             button1.SetTextColor(Android.Graphics.Color.RoyalBlue);
 
-            return tcs.Task;
+            return await tcs.Task;
         }
 
-        public Task<AlertResult> ShowYesNoDialog(string title, string message, string Yes, string No)
+        public async Task<AlertResult> ShowYesNoDialog(string title, string message, string Yes, string No)
         {
             var tcs = new TaskCompletionSource<AlertResult>();
             AlertResult alertResult = new AlertResult();
@@ -123,7 +128,7 @@ namespace CutyOthello.Droid
             button2.SetX(-190);
 
             tcs.SetResult(alertResult);
-            return tcs.Task;
+            return await tcs.Task;
         }
     }
 }

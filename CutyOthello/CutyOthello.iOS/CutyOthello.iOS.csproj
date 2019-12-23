@@ -192,4 +192,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\Yazirusi.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\AshiAto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Keikoku.png" />
+  </ItemGroup>
 </Project>

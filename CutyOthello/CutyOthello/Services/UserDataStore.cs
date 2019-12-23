@@ -11,11 +11,21 @@ namespace CutyOthello.Services
     {
         public enum  EditOrCreaterCharaStatus
         {
-            MainTitle,EditChara, CreateNewChara,SelectPlayerOne,SelectPlayerTwo,BattleDisp,BattleResult
+            MainTitle,EditChara,CreateNewChara,SelectPlayerOne,SelectPlayerTwo,BattleDisp,BattleResult,BattleModeSelect
         };
 
         //遷移方法ステータス
         public Enum WaytoG02Status;
+
+        //オセロ画面への遷移方法ステータス
+        public Enum WaytoGZ201Status;
+
+        public enum BattleMode
+        {
+            PlayerVSPlayer, CPUVSPlayer, PlayerVSCPU
+        };
+
+        public Enum BattleModeStatus;
 
         public UserDataStore() : base()
         {

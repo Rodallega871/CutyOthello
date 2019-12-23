@@ -76,6 +76,7 @@ namespace CutyOthello.ViewModels
                         SelectedChara = null;
                         //遷移方法を保管する
                         userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.SelectPlayerOne;
+                        userDataStore.WaytoGZ201Status = null;
                         Application.Current.MainPage = new GB01();
                         break;
                     default:
@@ -111,6 +112,7 @@ namespace CutyOthello.ViewModels
                             SelectedChara = null;
                             //遷移方法を保管する
                             userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.BattleDisp;
+                            userDataStore.WaytoGZ201Status = UserDataStore.EditOrCreaterCharaStatus.SelectPlayerTwo;
                             Application.Current.MainPage = new GZ201();
                         }
                         else

@@ -25,6 +25,8 @@ namespace CutyOthello.Services
         public int PlayerOneCount { get; set; }
         //対戦用キャラクター取得石数
         public int PlayerTwoCount { get; set; }
+        //CPUの対戦レベル
+        public int CPULevelInfo { get; set; }
 
         public CharacterDataStore() : base()
         {
@@ -35,16 +37,15 @@ namespace CutyOthello.Services
         {
             models = new ObservableCollection<Character>
             {
-                new Character{Id = 0, DogType ="A",DogColor = "0",DogName = "Hanako",DogOwnerName = "A",DogPicture = "shiba.png",IsDisplay = false },
-                new Character{Id = 0,DogType = "A",DogColor = "0",DogName = "Hanako",DogOwnerName = "A",DogPicture = "shiba.png",IsDisplay = false},
-                new Character{Id = 1,DogType = "B",DogColor = "0",DogName = "Taro",DogOwnerName = "B",DogPicture = "poodle.png",IsDisplay = false},
+                new Character{Id = 0,DogType = "A",DogColor = "0",DogName = "Taro",DogOwnerName = "A",DogPicture = "shiba.png",IsDisplay = false},
+                new Character{Id = 1,DogType = "B",DogColor = "0",DogName = "Hanako",DogOwnerName = "B",DogPicture = "poodle.png",IsDisplay = false},
                 new Character{Id = 2,DogType = "C",DogColor = "0",DogName = "Suguru",DogOwnerName = "C",DogPicture = "buldogSample.png",IsDisplay = false},
-                new Character{Id = 3,DogType = "D",DogColor = "0",DogName = "Inumi",DogOwnerName = "D",DogPicture = "PIG.png",IsDisplay = false},
-                new Character{Id = 4,DogType = "E",DogColor = "0",DogName = "Kirin",DogOwnerName = "E",DogPicture = "Giraffe.png",IsDisplay = false},
+                new Character{Id = 3,DogType = "D",DogColor = "0",DogName = "Piglet",DogOwnerName = "D",DogPicture = "PIG.png",IsDisplay = false},
+                //new Character{Id = 4,DogType = "E",DogColor = "0",DogName = "Kirin",DogOwnerName = "E",DogPicture = "Giraffe.png",IsDisplay = false},
                 new Character{Id = 5,DogType = "F",DogColor = "0",DogName = "Ele",DogOwnerName = "F",DogPicture = "Eephant.png",IsDisplay = false},
-                new Character{Id = 6,DogType = "G",DogColor = "0",DogName = "CowCow",DogOwnerName = "G",DogPicture = "Cow.png",IsDisplay = false},
-                new Character{Id = 8,DogType = "H",DogColor = "0",DogName = "Robo",DogOwnerName = "I",DogPicture = "Robo.png",IsDisplay = false},
-                new Character{Id = 9,DogType = "I",DogColor = "0",DogName = "Master",DogOwnerName = "J",DogPicture = "OthlloMaster.png",IsDisplay = false}
+                //new Character{Id = 6,DogType = "G",DogColor = "0",DogName = "CowCow",DogOwnerName = "G",DogPicture = "Cow.png",IsDisplay = false},
+                //new Character{Id = 8,DogType = "H",DogColor = "0",DogName = "Robo",DogOwnerName = "I",DogPicture = "Robo.png",IsDisplay = false},
+                //new Character{Id = 9,DogType = "I",DogColor = "0",DogName = "Master",DogOwnerName = "J",DogPicture = "OthlloMaster.png",IsDisplay = false}
                 //テスト用
                //,new Character(id:10,dogType:"I",dogColor:"0",dogName:"ZEN",dogOwnerName:"J",dogPicture:"shiba.png",true)
                //,new Character(id:11,dogType:"I",dogColor:"0",dogName:"Cotton",dogOwnerName:"J",dogPicture:"poodle.png",true)
@@ -57,7 +58,8 @@ namespace CutyOthello.Services
             CharacterImages = new List<string>
             {
                 "shiba.png","poodle.png","buldogSample.png","PIG.png",
-                "Giraffe.png","Eephant.png","Cow.png","Robo.png","OthlloMaster.png"
+                /*"Giraffe.png" ,*/ "Eephant.png","Cow.png"
+                /*,"Robo.png","OthlloMaster.png"*/
             };
 
             return CharacterImages;
@@ -143,15 +145,13 @@ namespace CutyOthello.Services
         /// <returns></returns>
         public bool ValidationRegister(string registerName, string registerOwnerName)
         {
-            string checkPettern = @"^\p{IsHiragana}+$";
+            //string checkPettern = @"^\p{IsHiragana}+$";
+            //Match matchName = Regex.Match(registerName, checkPettern);
+            //if (!matchName.Success) return false;
+            //Match matchOwnerName = Regex.Match(registerOwnerName, checkPettern);
+            //if (!matchOwnerName.Success) return false;
 
-            Match matchName = Regex.Match(registerName, checkPettern);
-            if (!matchName.Success) return false;
-
-            Match matchOwnerName = Regex.Match(registerOwnerName, checkPettern);
-            if (!matchOwnerName.Success) return false;
-
-            return true;
+            return String.IsNullOrEmpty(registerName);
         }
     }
 }

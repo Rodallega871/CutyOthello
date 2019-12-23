@@ -61,6 +61,9 @@
                 </Frame>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
+
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
                 <ListView HasUnevenRows="True" ItemsSource="{Binding Path=testList}" SelectedItem="{Binding SelectedChara}">
                     <ListView.ItemTemplate>
                         <DataTemplate>

@@ -45,6 +45,10 @@ namespace CutyOthello.Views
             if (Row == 4 && Col == 3) tmp = Player1Image;
             if (Row == 3 && Col == 3) tmp = Player2Image;
             if (Row == 4 && Col == 4) tmp = Player2Image;
+            if (Row == 2 && Col == 3) tmp = NextCanPutImage;
+            if (Row == 3 && Col == 2) tmp = NextCanPutImage;
+            if (Row == 4 && Col == 5) tmp = NextCanPutImage;
+            if (Row == 5 && Col == 4) tmp = NextCanPutImage;
 
             OneStoneView = new Frame
             {
@@ -89,6 +93,17 @@ namespace CutyOthello.Views
         public void ChangeBlankView()
         {
             OneStoneView.Content = null;
+        }
+
+        public void DisableTap()
+        {
+            singleTap.Tapped -= ChangeStone;
+        }
+
+        public void EnableTap()
+        {
+
+            singleTap.Tapped += ChangeStone;
         }
 
     }
