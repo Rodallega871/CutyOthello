@@ -60,10 +60,7 @@
                     <Label Text="Character Select" Style="{StaticResource LabelStyle}"/>
                 </Frame>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1">
-
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="1">
+            <Grid Grid.Row="1" Grid.Column="1" >
                 <ListView HasUnevenRows="True" ItemsSource="{Binding Path=testList}" SelectedItem="{Binding SelectedChara}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -80,6 +77,33 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" IsVisible="{Binding isDisiplay}">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" BackgroundColor="Pink" >
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="0">
+                        <Image Source="{Binding DialogImage}" BackgroundColor="Pink"/>
+                    </Frame>
+                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+                        <Label Text="{Binding DialogSentence}" Style="{StaticResource LabelStyle}" />
+                    </Frame>
+                    <Button Text="{Binding DialogButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2"
+                            Command="{Binding TapDialogButton}"/>
+                </Grid>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="1">
                 <Frame Style="{StaticResource FrameStyle}" >

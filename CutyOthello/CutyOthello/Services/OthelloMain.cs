@@ -86,5 +86,9 @@ namespace CutyOthello.Services
             board.setSakiyomiNum(LevelInfo * 2 - 1);
         }
 
+        public bool GetNowTurn()
+        {
+            return board.NowTurn;
+        }
     }
 }

@@ -7,13 +7,12 @@ namespace CutyOthello.Models
 {
     class Board
     {
-        bool NowTurn;
-        bool AITurn;
+        public bool NowTurn;
         int NowIndex;
         static readonly bool BlackTurn = true;
         static readonly bool WhiteTurn = false;
         public int SakiyomiNum = 1;
-
+        public int BlankBoardNum = 0;
         UInt64 playerBoard;
         UInt64 opponentBoard;
         public UInt64 OptimalBoard;
@@ -379,13 +378,10 @@ namespace CutyOthello.Models
 
         public void StartUpMinMax()
         {
-            //var sw = new System.Diagnostics.Stopwatch();
-            //sw.Start();
-            OptimalBoard = 0;
-            MinMax(playerBoard,opponentBoard, SakiyomiNum, false);
-            //sw.Stop();
-            //TimeSpan ts = sw.Elapsed;
-            //Console.WriteLine($"時間：　{ts}");
+            OptimalBoard = 0;            
+            BlankBoardNum = 64 - bitCount(playerBoard) - bitCount(opponentBoard);
+            if (BlankBoardNum > SakiyomiNum) MinMax(playerBoard, opponentBoard, SakiyomiNum, false);
+            else MinMax(playerBoard, opponentBoard, BlankBoardNum % 2 == 1 ? BlankBoardNum : BlankBoardNum -1, false);
         }
 
 
@@ -421,23 +417,32 @@ namespace CutyOthello.Models
             //x=1 y=1 の石をスタートとする。。
             UInt64 put = 0x8000000000000000;
             
-            for (int i = 1; i < 64; i++)
+            for (int i = 1; i < 65; i++)
             {
                 if ((put & opponentLegalBoard) == put)
                 {
-                    //ConsoleWriteLine(depth, put);
                     var Board = this.reverse(put, tmpBoard);
                     //Console.WriteLine("リバース開始");
                     //ConsoleWriteLine(depth, Board[0]);
                     //ConsoleWriteLine(depth, Board[1]);
                     //Console.WriteLine("リバース終了");
                     var val = MinMax(Board[0], Board[1], depth - 1);
+                    //ConsoleWriteLine(depth, put);
+                    //Console.WriteLine("点数" + val);
 
                     if (depth % 2 == 1 && best < val)
                     {
                         best = val;
-                        if(depth == SakiyomiNum)
-                            OptimalBoard = put;
+                        if (BlankBoardNum > SakiyomiNum)
+                        {
+                            if (depth == SakiyomiNum)
+                                OptimalBoard = put;
+                        }
+                        else if(BlankBoardNum <= SakiyomiNum)
+                        {
+                            if (depth == BlankBoardNum)
+                                OptimalBoard = put;
+                        }
                     }
                     else if (depth % 2 == 0 && worst > val)
                     {

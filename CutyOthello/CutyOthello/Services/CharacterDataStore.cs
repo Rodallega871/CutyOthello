@@ -28,6 +28,14 @@ namespace CutyOthello.Services
         //CPUの対戦レベル
         public int CPULevelInfo { get; set; }
 
+        public Enum SurrenderJudge { get; set; }
+
+        //降参者確認用
+        public enum SurrenderStatus
+        {
+            DidntSurrernder,SurrenderPlayerOne,SurrenderPlayerTwo
+        }
+
         public CharacterDataStore() : base()
         {
             tmpcharacters = new ObservableCollection<Character> { };
@@ -59,7 +67,7 @@ namespace CutyOthello.Services
             {
                 "shiba.png","poodle.png","buldogSample.png","PIG.png",
                 /*"Giraffe.png" ,*/ "Eephant.png","Cow.png"
-                /*,"Robo.png","OthlloMaster.png"*/
+                ,/*"Robo.png","OthlloMaster.png"*/
             };
 
             return CharacterImages;

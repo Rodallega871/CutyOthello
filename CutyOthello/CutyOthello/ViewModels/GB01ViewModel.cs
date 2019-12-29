@@ -40,8 +40,37 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._Player2BoardColor, value); }
         }
 
+        private bool _isDisiplay;
+        public bool isDisiplay
+        {
+            get { return this._isDisiplay; }
+            set { this.SetProperty(ref this._isDisiplay, value); }
+        }
+
+        private string _DialogImage;
+        public string DialogImage
+        {
+            get { return this._DialogImage; }
+            set { this.SetProperty(ref this._DialogImage, value); }
+        }
+
+        private string _DialogSentence;
+        public string DialogSentence
+        {
+            get { return this._DialogSentence; }
+            set { this.SetProperty(ref this._DialogSentence, value); }
+        }
+
+        private string _DialogButton;
+        public string DialogButton
+        {
+            get { return this._DialogButton; }
+            set { this.SetProperty(ref this._DialogButton, value); }
+        }            
+
         public Command TapBackButton { get; }
         public Command TapOKButton { get; }
+        public Command TapDialogButton { get; }
 
         public GB01ViewModel()
         {
@@ -99,9 +128,13 @@ namespace CutyOthello.ViewModels
                         }
                         else
                         {
-                            //ポップアップを表示する。(タップした場所が適切でない場合)
-                            DependencyService.Get<IAlertService>().ShowYesNoDialog(
-                                "けいこく", "PLAYER1のキャラクターをえらんでください。", "OK", "Cancel");
+                            ////ポップアップを表示する。(タップした場所が適切でない場合)
+                            //DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                            //    "けいこく", "PLAYER1のキャラクターをえらんでください。", "OK", "Cancel");
+                            isDisiplay = true;
+                            DialogSentence = "PLAYER1のキャラクターをえらんでください。";
+                            DialogButton = "OK";
+                            DialogImage = "Keikoku.png";
 
                         }
                         break;
@@ -117,15 +150,24 @@ namespace CutyOthello.ViewModels
                         }
                         else
                         {
-                            //ポップアップを表示する。(タップした場所が適切でない場合)
-                            DependencyService.Get<IAlertService>().ShowYesNoDialog(
-                                "けいこく", "PLAYER2のキャラクターをえらんでください。", "OK", "Cancel");
+                            ////ポップアップを表示する。(タップした場所が適切でない場合)
+                            //DependencyService.Get<IAlertService>().ShowYesNoDialog(
+                            //    "けいこく", "PLAYER2のキャラクターをえらんでください。", "OK", "Cancel");
+                            isDisiplay = true;
+                            DialogSentence = "PLAYER2のキャラクターをえらんでください。";
+                            DialogButton = "OK";
+                            DialogImage = "Keikoku.png";
                         }
 
                         break;
                     default:
                         break;
                 }
+            });
+
+            TapDialogButton = new Command(() =>
+            {
+                isDisiplay = false;
             });
         }
     }

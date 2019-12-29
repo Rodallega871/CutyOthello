@@ -53,6 +53,50 @@ namespace CutyOthello.ViewModels
             get { return this._CanDeleteChara; }
             set { this.SetProperty(ref this._CanDeleteChara, value); }
         }
+        private bool _CanTapDialogButton;
+        public bool CanTapDialogButton
+        {
+            get { return this._CanTapDialogButton; }
+            set { this.SetProperty(ref this._CanTapDialogButton, value); }
+        }
+       
+        private bool _isDisiplay;
+        public bool isDisiplay
+        {
+            get { return this._isDisiplay; }
+            set { this.SetProperty(ref this._isDisiplay, value); }
+        }
+
+        private string _DialogImage;
+        public string DialogImage
+        {
+            get { return this._DialogImage; }
+            set { this.SetProperty(ref this._DialogImage, value); }
+        }
+
+        private string _DialogSentence;
+        public string DialogSentence
+        {
+            get { return this._DialogSentence; }
+            set { this.SetProperty(ref this._DialogSentence, value); }
+        }
+
+        private string _DialogButton;
+        public string DialogButton
+        {
+            get { return this._DialogButton; }
+            set { this.SetProperty(ref this._DialogButton, value); }
+        }
+
+        private string _DialogCancelButton;
+        public string DialogCancelButton
+        {
+            get { return this._DialogCancelButton; }
+            set { this.SetProperty(ref this._DialogCancelButton, value); }
+        }
+        
+        //Delete : true / Register :false
+        public bool DeleteOrRegister;
 
         public List<string> CaharacterImages;
 
@@ -61,7 +105,9 @@ namespace CutyOthello.ViewModels
         public Command TapDeleteButton { get; }        
         public Command TapLeft { get; }
         public Command TapRight { get; }
-
+        public Command TapDialogButton { get; }
+        public Command TapDialogCancelButton { get; }
+                   
         public GC02ViewModel()
         {
             CaharacterImages = characterDataStore.GetCharacterImages();
@@ -90,13 +136,18 @@ namespace CutyOthello.ViewModels
                 Application.Current.MainPage = new GC01();
             });
 
-            TapDeleteButton = new Command(async() =>
+            TapDeleteButton = new Command(() =>
             {
+                DeleteOrRegister = true;
+                isDisiplay = true;
+                DialogSentence = "このデータをさくじょしますか？";
+                DialogButton = "YES";
+                DialogCancelButton = "No";
+                DialogImage = "Keikoku.png";
+                CanTapDialogButton = true;
+
                 //var result = await DependencyService.Get<IAlertService>().ShowYesNoDialog(
                 //        "けいこく", "データをほんとうにさくじょしますか？。", "OK", "Cancel");
-
-                await characterDataStore.DeleteCharacter();
-                Application.Current.MainPage = new GC01();
 
                 //if (result.isYes)
                 //{
@@ -105,45 +156,74 @@ namespace CutyOthello.ViewModels
                 //}
             });
 
-            TapRegisterButton = new Command(async() =>
+            TapRegisterButton = new Command(() =>
             {
+                DeleteOrRegister = false;
+                isDisiplay = true;
+                DialogSentence = "このデータをとうろくしますか？";
+                DialogButton = "YES";
+                DialogCancelButton = "No";
+                DialogImage = "Keikoku.png";
+                CanTapDialogButton = true;
+
                 //var result = await DependencyService.Get<IAlertService>().ShowYesNoDialog(
                 //    "けいこく", "データをほんとうにとうろくしますか？。", "OK", "Cancel");
 
-                //遷移方法が(編集か新規登録を確認する)
-                switch (userDataStore.WaytoG02Status)
+            });
+
+            TapDialogButton = new Command(async() =>
+            {                
+                isDisiplay = false;
+
+                if (DeleteOrRegister)
                 {
-                    case UserDataStore.EditOrCreaterCharaStatus.EditChara:
-                        var result2 = await characterDataStore.UpdateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
-                        if (result2)
-                        {
-                            //await DependencyService.Get<IAlertService>().ShowYesNoDialog(
-                            //   "かんりょう", "キャラクターデータをへんこうしました。", "OK", "Cancel");
-                            Application.Current.MainPage = new GC01();
-                        }
-                        break;
-                    case UserDataStore.EditOrCreaterCharaStatus.CreateNewChara:
-                        var result3 = await characterDataStore.CreateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
-                        if (result3)
-                        {
-                            //await DependencyService.Get<IAlertService>().ShowYesNoDialog(
-                            //    "かんりょう", "キャラクターをとうろくしました。", "OK", "Cancel");
-                            Application.Current.MainPage = new GC01();
-                        }
-                        break;
-                    default:
-                        break;
+                    await characterDataStore.DeleteCharacter();
+                    Application.Current.MainPage = new GC01();
                 }
+                else
+                {
+                    //遷移方法が(編集か新規登録を確認する)
+                    switch (userDataStore.WaytoG02Status)
+                    {
+                        case UserDataStore.EditOrCreaterCharaStatus.EditChara:
+                            var result2 = await characterDataStore.UpdateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
+                            if (result2)
+                            {
+                                Application.Current.MainPage = new GC01();
+                            }
+                            else
+                            {
+                                isDisiplay = true;
+                                DialogSentence = "NAMEをにゅうりょくしてください。";
+                                DialogCancelButton = "OK";
+                                DialogImage = "Keikoku.png";
+                                CanTapDialogButton = false;
+                            }
+                            break;
+                        case UserDataStore.EditOrCreaterCharaStatus.CreateNewChara:
+                            var result3 = await characterDataStore.CreateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
+                            if (result3)
+                            {
+                                Application.Current.MainPage = new GC01();
+                            }
+                            else
+                            {
+                                isDisiplay = true;
+                                DialogSentence = "NAMEをにゅうりょくしてください。";
+                                DialogCancelButton = "OK";
+                                DialogImage = "Keikoku.png";
+                                CanTapDialogButton = false;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
 
-                //if (result.isYes)
-                //{
-                //    var result2 = await characterDataStore.CreateCharacter(CharacteImage, RegisterName, RegisterOwnerName);
-
-                //    if (result2)
-                //    {
-                //        Application.Current.MainPage = new GC01();
-                //    }
-                //}
+            TapDialogCancelButton = new Command(() =>
+            {
+                isDisiplay = false;
             });
 
             TapLeft = new Command(() =>

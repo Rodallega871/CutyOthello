@@ -116,21 +116,61 @@
                     <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="0">
                         <Image Source="{Binding DialogImage}" BackgroundColor="Pink"/>
                     </Frame>
+                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="2">
+                        <Image Source="{Binding DialogCharacterImage}" BackgroundColor="Pink"/>
+                    </Frame>
                     <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
                         <Label Text="{Binding DialogSentence}" Style="{StaticResource LabelStyle}" />
                     </Frame>
                     <Button Text="{Binding DialogButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2"
                             Command="{Binding TapDialogButton}"/>
+                    <Button Text="{Binding DialogConfirmSurrenderButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="0"
+                            Clicked="TapDialogConfirmSurrenderButton" IsVisible="{Binding DoTapSurrender}"/>
                 </Grid>
-            </Grid>            
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1" IsVisible="{Binding testBool3}">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" BackgroundColor="Pink" >
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="0">
+                        <Image Source="{Binding DialogImage}" BackgroundColor="Pink"/>
+                    </Frame>
+                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="2">
+                        <Image Source="{Binding DialogCharacterImage}" BackgroundColor="Pink"/>
+                    </Frame>
+                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+                        <Label Text="{Binding DialogSentence}" Style="{StaticResource LabelStyle}" />
+                    </Frame>
+                    <Button Text="{Binding DialogButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2"
+                            Clicked="TapCPUPass" Command="{Binding TapCPUPass}"/>
+                </Grid>
+            </Grid>
             <!--<local:BoardView x:Name="board" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>-->
             <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
                 <!--<Button Text="GameFinish" Style="{StaticResource ButtonStyle}" Command="{Binding TapPASSButton}"/>-->
-                <Button Text="GameFinish" Style="{StaticResource ButtonStyle}" Clicked="TapNextGamen" IsEnabled="{Binding CanFinishGame}"/>
+                <Button Text="SeeResults" Style="{StaticResource ButtonStyle}" Clicked="TapNextGamen" IsEnabled="{Binding CanFinishGame}"/>
             </Grid>
             <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
-                <!--<Button Text="Surrender" Style="{StaticResource ButtonStyle}" Command="{Binding TapSurrenderButton}"/>-->
-                <Button Text="Surrender" Style="{StaticResource ButtonStyle}" Clicked="TapSurrenderButton" IsEnabled="{Binding CanSurrender}"/>
+                <Button Text="Surrender" Style="{StaticResource ButtonStyle}" Command="{Binding TapSurrenderButton}" IsEnabled="{Binding CanSurrender}" />
+                <!--<Button Text="Surrender" Style="{StaticResource ButtonStyle}" Clicked="TapSurrenderButton" IsEnabled="{Binding CanSurrender}"/>-->
             </Grid>
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
                 <!--<Button Text="TopMenu" Style="{StaticResource ButtonStyle}" Command="{Binding TapTopMenuButton}"/>-->

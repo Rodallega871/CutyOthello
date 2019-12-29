@@ -14,10 +14,10 @@ namespace CutyOthello.ViewModels
     class GZ201ViewModel : BaseViewModel
     {
         //public Command TapPASSButton { get; }
-        //public Command TapSurrenderButton { get; }
+        public Command TapSurrenderButton { get; }
         //public Command TapTopMenuButton { get; }
         public Command TapDialogButton { get; }
-
+        public Command TapCPUPass { get; }
 
         private ObservableCollection<Character> _testList;
         public ObservableCollection<Character> testList
@@ -117,6 +117,20 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._testBool2, value); }
         }
 
+        private bool _testBool3;
+        public bool testBool3
+        {
+            get { return this._testBool3; }
+            set { this.SetProperty(ref this._testBool3, value); }
+        }
+
+        private bool _DoTapSurrender;
+        public bool DoTapSurrender
+        {
+            get { return this._DoTapSurrender; }
+            set { this.SetProperty(ref this._DoTapSurrender, value); }
+        }
+        
         private string _DialogImage;
         public string DialogImage
         {
@@ -124,6 +138,13 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._DialogImage, value); }
         }
 
+        private string _DialogCharacterImage;
+        public string DialogCharacterImage
+        {
+            get { return this._DialogCharacterImage; }
+            set { this.SetProperty(ref this._DialogCharacterImage, value); }
+        }
+       
         private string _DialogSentence;
         public string DialogSentence
         {
@@ -138,6 +159,13 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._DialogButton, value); }
         }
 
+        private string _DialogConfirmSurrenderButton;
+        public string DialogConfirmSurrenderButton
+        {
+            get { return this._DialogConfirmSurrenderButton; }
+            set { this.SetProperty(ref this._DialogConfirmSurrenderButton, value); }
+        }
+       
         OthelloMain othelloMain;
 
         public GZ201ViewModel()
@@ -151,6 +179,7 @@ namespace CutyOthello.ViewModels
             CanFinishGame = false;
             CanSurrender = true;
             CantoTopMenu = true;
+            characterDataStore.SurrenderJudge = CharacterDataStore.SurrenderStatus.DidntSurrernder;
 
             othelloMain = new OthelloMain();
             othelloMain.SetCpuLevel(characterDataStore.CPULevelInfo);
@@ -158,6 +187,24 @@ namespace CutyOthello.ViewModels
             TapDialogButton = new Command(() =>
             {
                 testBool2 = false;
+                DialogCharacterImage = null;
+            });
+
+            TapCPUPass = new Command(() =>
+            {
+                testBool3 = false;
+                DialogCharacterImage = null;
+            });
+
+            TapSurrenderButton = new Command(() =>
+            {
+                testBool2 = true;
+                DoTapSurrender = true;
+                DialogImage = "Keikoku.png";
+                DialogCharacterImage = othelloMain.GetNowTurn() ? Player1Picture : Player2Picture;
+                DialogSentence = "ほんとうにこうさんしますか？";
+                DialogButton = "Cancel";
+                DialogConfirmSurrenderButton = "OK";
             });
 
             //購読解除がうまく設定できないからバインディング挫折
@@ -186,15 +233,13 @@ namespace CutyOthello.ViewModels
             Application.Current.MainPage = new GZ202();
         }
 
-        public void ViewModelTapSurrenderButton()
+        public void ConfirmSurrender()
         {
-            //ポップアップを表示する。(タップした場所が適切でない場合)
-            DependencyService.Get<IAlertService>().ShowYesNoDialog(
-                "とちゅうしゅうりょう", "こうさんしました。", "OK", "Cancel");
-
             userDataStore.WaytoG02Status = UserDataStore.EditOrCreaterCharaStatus.BattleResult;
             characterDataStore.PlayerOneCount = GetBlackStoneList()[0].Count;
             characterDataStore.PlayerTwoCount = GetWhiteStoneList()[0].Count;
+            characterDataStore.SurrenderJudge = othelloMain.GetNowTurn() ? 
+                CharacterDataStore.SurrenderStatus.SurrenderPlayerOne : CharacterDataStore.SurrenderStatus.SurrenderPlayerTwo;
             Application.Current.MainPage = new GZ202();
         }
 
@@ -211,6 +256,7 @@ namespace CutyOthello.ViewModels
                     DialogImage = "Keikoku.png";
                     DialogSentence = "そこにいしはおけません";
                     DialogButton = "OK";
+                    DialogCharacterImage = othelloMain.GetNowTurn() ? Player1Picture : Player2Picture;
                     return false;
                 }
 
@@ -224,6 +270,7 @@ namespace CutyOthello.ViewModels
                     DialogImage = "Keikoku.png";
                     DialogSentence = "おけるばしょがないので、パスします。";
                     DialogButton = "OK";
+                    DialogCharacterImage = othelloMain.GetNowTurn() ? Player2Picture : Player1Picture;
 
                     return false;
                 }
@@ -243,7 +290,7 @@ namespace CutyOthello.ViewModels
                     //    "ゲームしゅうりょう", "けっかしゅうけいちゅうです。GameFinishボタンをおしてください。", "OK", "Cancel");
                     testBool2 = true;
                     DialogImage = "AshiAto.png";
-                    DialogSentence = "けっかしゅうけいちゅうです。GameFinishボタンをおしてください。";
+                    DialogSentence = "けっかしゅうけいちゅうです。SeeResultsボタンをおしてください。";
                     DialogButton = "OK";
 
                     CanFinishGame = true;
@@ -261,9 +308,8 @@ namespace CutyOthello.ViewModels
 
         public async Task<bool> DammyModelCPU()
         {
-            await Task.Run(() =>
+            var reslut = await Task.Run(() =>
             {
-
                 othelloMain.PutStoneCPU();
 
                 //パスチェック
@@ -272,11 +318,12 @@ namespace CutyOthello.ViewModels
                     ////ポップアップを表示する。(タップした場所が適切でない場合)
                     //DependencyService.Get<IAlertService>().ShowYesNoDialog(
                     //    "けいこく", "おけるばしょがないので、パスします。", "OK", "Cancel");
-                    testBool2 = true;
+                    testBool3 = true;
                     DialogImage = "Keikoku.png";
                     DialogSentence = "おけるばしょがないので、パスします。";
                     DialogButton = "OK";
-                    Task.Run(async() => await DammyModelCPU()); 
+                    DialogCharacterImage = othelloMain.GetNowTurn() ? Player2Picture : Player1Picture;
+                    return false; 
                 }
                 else
                 {
@@ -294,7 +341,7 @@ namespace CutyOthello.ViewModels
                     //    "ゲームしゅうりょう", "けっかしゅうけいちゅうです。GameFinishボタンをおしてください。", "OK", "Cancel");
                     testBool2 = true;
                     DialogImage = "AshiAto.png";
-                    DialogSentence = "けっかしゅうけいちゅうです。GameFinishボタンをおしてください。";
+                    DialogSentence = "けっかしゅうけいちゅうです。SeeResultsボタンをおしてください。";
                     DialogButton = "OK";
 
                     CanFinishGame = true;
@@ -307,7 +354,7 @@ namespace CutyOthello.ViewModels
 
                 return true;
             });
-            return true;
+            return reslut;
         }
 
         public List<List<int>> GetBlackStoneList()

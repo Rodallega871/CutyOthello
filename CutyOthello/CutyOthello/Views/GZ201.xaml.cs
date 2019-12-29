@@ -117,7 +117,8 @@ namespace CutyOthello.Views
                             viewmodel.CantoTopMenu = false;
                             DisableTapBoard();
                             viewmodel.testBool = true;
-                            await viewmodel.DammyModelCPU();
+
+                            var reslut = await viewmodel.DammyModelCPU();
 
                             for (int i = 0; i < viewmodel.GetBlackStoneList()[0].Count; i++)
                             {
@@ -137,11 +138,11 @@ namespace CutyOthello.Views
                             for (int k = 0; k < viewmodel.GetBlankList()[0].Count; k++)
                             {
                                 stoneViews[viewmodel.GetBlankList()[0][k], viewmodel.GetBlankList()[1][k]].ChangeBlankView();
+
                             }
 
                             EnableTapBoard();
                         }
-
                         viewmodel.testBool = false;
 
                         //ゲーム終了していれば戻さない。
@@ -169,10 +170,45 @@ namespace CutyOthello.Views
             MessagingCenter.Unsubscribe<StoneView, List<int>>(this, "Sending");
         }
 
-        private void TapSurrenderButton(object sender, EventArgs e)
+        private void TapDialogConfirmSurrenderButton(object sender, EventArgs e)
         {
-            viewmodel.ViewModelTapSurrenderButton();
+            viewmodel.ConfirmSurrender();
             MessagingCenter.Unsubscribe<StoneView, List<int>>(this, "Sending");
+        }
+
+        private async void TapCPUPass(object sender, EventArgs e)
+        {
+            viewmodel.CanSurrender = false;
+            viewmodel.CantoTopMenu = false;
+            DisableTapBoard();
+            viewmodel.testBool3 = false;
+            viewmodel.testBool = true;
+
+            var reslut = await viewmodel.DammyModelCPU();
+
+            for (int i = 0; i < viewmodel.GetBlackStoneList()[0].Count; i++)
+            {
+                stoneViews[viewmodel.GetBlackStoneList()[0][i], viewmodel.GetBlackStoneList()[1][i]].ChangePlyerOneView();
+            }
+
+            for (int j = 0; j < viewmodel.GetWhiteStoneList()[0].Count; j++)
+            {
+                stoneViews[viewmodel.GetWhiteStoneList()[0][j], viewmodel.GetWhiteStoneList()[1][j]].ChangePlyerTwoView();
+            }
+
+            for (int k = 0; k < viewmodel.GetNextStoneList()[0].Count; k++)
+            {
+                stoneViews[viewmodel.GetNextStoneList()[0][k], viewmodel.GetNextStoneList()[1][k]].ChangeNextView();
+            }
+
+            for (int k = 0; k < viewmodel.GetBlankList()[0].Count; k++)
+            {
+                stoneViews[viewmodel.GetBlankList()[0][k], viewmodel.GetBlankList()[1][k]].ChangeBlankView();
+
+            }
+
+            EnableTapBoard();
+            viewmodel.testBool = false;
         }
 
         private void DisableTapBoard()
@@ -192,6 +228,5 @@ namespace CutyOthello.Views
                     stoneViews[row, col].EnableTap();
                 }
         }
-
     }
 }

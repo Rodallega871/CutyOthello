@@ -1,4 +1,5 @@
-﻿using CutyOthello.Views;
+﻿using CutyOthello.Services;
+using CutyOthello.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -105,24 +106,45 @@ namespace CutyOthello.ViewModels
             Player2DogImage = characterDataStore.PlayerTwo.DogPicture;
             Player2GotStoneCount = characterDataStore.PlayerTwoCount.ToString() + "  /  " + allStoneCount;
 
-            if (characterDataStore.PlayerOneCount > characterDataStore.PlayerTwoCount)
+            //勝者を確定させる。
+            if(characterDataStore.SurrenderJudge.Equals(CharacterDataStore.SurrenderStatus.SurrenderPlayerOne))
             {
-                DisplayWinnerName = characterDataStore.PlayerOne.DogName + Environment.NewLine + "Winner";
-                PlayerOneTextColor = "Red";
-                PlayerTwoTextColor = "RoyalBlue";
-                PlayerOneOutLineColor = "Red";
-                PlayerTwoOutLineColor = "Pink";
-            }
-            else if (characterDataStore.PlayerOneCount < characterDataStore.PlayerTwoCount)
-            {
-                DisplayWinnerName = characterDataStore.PlayerTwo.DogName + Environment.NewLine + "Winner";
+                DisplayWinnerName = characterDataStore.PlayerTwo.DogName + Environment.NewLine + "Winner(こうさん)";
                 PlayerOneTextColor = "RoyalBlue";
                 PlayerTwoTextColor = "Red";
                 PlayerOneOutLineColor = "Pink";
                 PlayerTwoOutLineColor = "Red";
             }
-            else if (characterDataStore.PlayerOneCount == characterDataStore.PlayerTwoCount)
-                DisplayWinnerName = "Draw";
+            else if (characterDataStore.SurrenderJudge.Equals(CharacterDataStore.SurrenderStatus.SurrenderPlayerTwo))
+            {
+                DisplayWinnerName = characterDataStore.PlayerOne.DogName + Environment.NewLine + "Winner(こうさん)";
+                PlayerOneTextColor = "Red";
+                PlayerTwoTextColor = "RoyalBlue";
+                PlayerOneOutLineColor = "Red";
+                PlayerTwoOutLineColor = "Pink";
+
+            }
+            else
+            {
+                if (characterDataStore.PlayerOneCount > characterDataStore.PlayerTwoCount)
+                {
+                    DisplayWinnerName = characterDataStore.PlayerOne.DogName + Environment.NewLine + "Winner";
+                    PlayerOneTextColor = "Red";
+                    PlayerTwoTextColor = "RoyalBlue";
+                    PlayerOneOutLineColor = "Red";
+                    PlayerTwoOutLineColor = "Pink";
+                }
+                else if (characterDataStore.PlayerOneCount < characterDataStore.PlayerTwoCount)
+                {
+                    DisplayWinnerName = characterDataStore.PlayerTwo.DogName + Environment.NewLine + "Winner";
+                    PlayerOneTextColor = "RoyalBlue";
+                    PlayerTwoTextColor = "Red";
+                    PlayerOneOutLineColor = "Pink";
+                    PlayerTwoOutLineColor = "Red";
+                }
+                else if (characterDataStore.PlayerOneCount == characterDataStore.PlayerTwoCount)
+                    DisplayWinnerName = "Draw";
+            }
 
             CanNextStage = false;
 

@@ -6,10 +6,10 @@
              mc:Ignorable="d"
              x:Class="CutyOthello.Views.GC02" BackgroundColor="#FBF2DD">
     <ContentPage.Resources>
-    <ResourceDictionary>
-        <Style x:Key="FrameStyle" TargetType="Frame">
-            <Setter Property="BackgroundColor" Value="Pink"/>
-            <Setter Property="CornerRadius" Value="5"/>
+        <ResourceDictionary>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Pink"/>
+                <Setter Property="CornerRadius" Value="5"/>
                 <Setter Property="Padding" Value="1"/>
                 <Setter Property="HasShadow" Value="False"/>
             </Style>
@@ -52,7 +52,7 @@
                 <Setter Property="BorderRadius" Value="10"/>
                 <Setter Property="BackgroundColor" Value="Pink"/>
             </Style>
-    </ResourceDictionary>
+        </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
@@ -83,37 +83,6 @@
                     <Label Text="How To Look" Style="{StaticResource LabelStyle}"/>
                 </Frame>
             </Grid>
-            <!--<Grid Grid.Row="3" Grid.Column="1" IsVisible="{Binding DoShowDialog}">
-                <Grid.RowDefinitions >
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1" Grid.Row="1" BackgroundColor="Pink" >
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="0">
-                        <Label Text="{Binding DialogTitle}" Style="{StaticResource LabelStyle}" />
-                    </Frame>
-                    <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
-                        <Label Text="{Binding DialogSentence}" Style="{StaticResource LabelStyle}" />
-                    </Frame>
-                    <Button Text="{Binding DialogButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2"
-                            Command="{Binding TapDialogButton}"/>
-                </Grid>-->
             <Grid Grid.Row="3" Grid.Column="1" >
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -143,6 +112,28 @@
                 <Frame Style="{StaticResource FrameStyle}" >
                     <Label Text="NAME" Style="{StaticResource LabelStyle}"/>
                 </Frame>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" IsVisible="{Binding isDisiplay}" BackgroundColor="Pink">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Frame Style="{StaticResource FrameStyle}" Grid.Row="0" Grid.Column="0">
+                    <Image Source="{Binding DialogImage}" BackgroundColor="Pink"/>
+                </Frame>
+                <Frame Style="{StaticResource FrameStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+                    <Label Text="{Binding DialogSentence}" Style="{StaticResource LabelStyle}" />
+                </Frame>
+                <Button Text="{Binding DialogButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="0"
+                            Command="{Binding TapDialogButton}" IsVisible="{Binding CanTapDialogButton}"/>
+                <Button Text="{Binding DialogCancelButton}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2"
+                            Command="{Binding TapDialogCancelButton}"/>
             </Grid>
             <Grid Grid.Row="5" Grid.Column="1" >
                 <Entry Placeholder="Enter tha Name" Text="{Binding RegisterName}"  

@@ -26,10 +26,40 @@ namespace CutyOthello.ViewModels
             set { this.SetProperty(ref this._SelectedChar, value); }
         }
 
+        private bool _isDisiplay;
+        public bool isDisiplay
+        {
+            get { return this._isDisiplay; }
+            set { this.SetProperty(ref this._isDisiplay, value); }
+        }
+
+        private string _DialogImage;
+        public string DialogImage
+        {
+            get { return this._DialogImage; }
+            set { this.SetProperty(ref this._DialogImage, value); }
+        }
+
+        private string _DialogSentence;
+        public string DialogSentence
+        {
+            get { return this._DialogSentence; }
+            set { this.SetProperty(ref this._DialogSentence, value); }
+        }
+
+        private string _DialogButton;
+        public string DialogButton
+        {
+            get { return this._DialogButton; }
+            set { this.SetProperty(ref this._DialogButton, value); }
+        }
+
         public Command TapBackButton { get; }
         public Command TapCreaterNewCharacter { get; }
-        public Command TapEditCharacter { get; }  
-
+        public Command TapEditCharacter { get; }
+        public Command TapDialogButton { get; }
+        public Command TapDialogCancelButton { get; }
+      
         public GC01ViewModel()
         {
             testList = characterDataStore.GetDisplayItem();
@@ -38,6 +68,12 @@ namespace CutyOthello.ViewModels
             {
                 Application.Current.MainPage = new GZ102();
             });
+
+            TapDialogButton = new Command(() =>
+            {
+                isDisiplay = false;
+            });
+
 
             TapEditCharacter = new Command(() =>
             {
@@ -51,8 +87,12 @@ namespace CutyOthello.ViewModels
                 }
                 else
                 {
-                    DependencyService.Get<IAlertService>().ShowDialog(
-                        "けいこく", "キャラクターをせんたくしてください。", "OK");
+                    //DependencyService.Get<IAlertService>().ShowDialog(
+                    //    "けいこく", "キャラクターをせんたくしてください。", "OK");
+                    isDisiplay = true;
+                    DialogSentence = "へんしゅうするキャラクターをせんたくしてください。";
+                    DialogButton = "OK";
+                    DialogImage = "Keikoku.png";
                 }
             });
             TapCreaterNewCharacter = new Command(() =>
